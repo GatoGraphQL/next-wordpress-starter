@@ -5,7 +5,7 @@ export const QUERY_ALL_CATEGORIES = gql`
     categories: self {
       edges: postCategories(limit: 10000) {
         node: self {
-          categoryId: id
+          databaseId: id
           description
           id
           name
@@ -19,7 +19,7 @@ export const QUERY_ALL_CATEGORIES = gql`
 export const QUERY_CATEGORY_BY_SLUG = gql`
   query CategoryBySlug($slug: ID!) {
     category(id: $slug, idType: SLUG) {
-      categoryId
+      databaseId
       description
       id
       name
