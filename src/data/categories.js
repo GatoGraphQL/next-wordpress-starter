@@ -17,9 +17,9 @@ export const QUERY_ALL_CATEGORIES = gql`
 `;
 
 export const QUERY_CATEGORY_BY_SLUG = gql`
-  query CategoryBySlug($slug: ID!) {
-    category(id: $slug, idType: SLUG) {
-      databaseId
+  query CategoryBySlug($slug: String!) {
+    category: postCategoryBySlug(slug: $slug) {
+      databaseId: id
       description
       id
       name
