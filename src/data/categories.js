@@ -29,10 +29,11 @@ export const QUERY_CATEGORY_BY_SLUG = gql`
 `;
 
 export const QUERY_CATEGORY_SEO_BY_SLUG = gql`
-  query CategorySEOBySlug($slug: ID!) {
-    category(id: $slug, idType: SLUG) {
+  query CategorySEOBySlug($slug: String!) {
+    category: postCategoryBySlug(slug: $slug) {
       id
       seo {
+        #TODO: This field is not yet supported
         canonical
         metaDesc
         metaRobotsNofollow
