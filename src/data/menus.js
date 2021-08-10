@@ -2,16 +2,16 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_MENUS = gql`
   {
-    menus {
-      edges {
-        node {
+    menus: self {
+      edges: menus {
+        node: self {
           id
-          menuItems {
-            edges {
-              node {
-                cssClasses
+          menuItems: items {
+            edges: self {
+              node: self {
+                cssClasses: classes
                 id
-                parentId
+                parentId: parentID
                 label
                 title
                 target
