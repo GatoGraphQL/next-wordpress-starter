@@ -6,8 +6,8 @@ export const QUERY_ALL_MENUS = gql`
       edges: menus {
         node: self {
           id
-          menuItems: items {
-            edges: self {
+          menuItems: self {
+            edges: items {
               node: self {
                 cssClasses: classes
                 id
