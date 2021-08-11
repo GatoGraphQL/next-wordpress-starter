@@ -102,15 +102,15 @@ export const QUERY_POST_BY_SLUG = gql`
 
 export const QUERY_POSTS_BY_CATEGORY_ID = gql`
   query PostsByCategoryId($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId }) {
-      edges {
-        node {
+    posts: self {
+      edges: posts(categoryIDs: [$categoryId]) {
+        node: self {
           author {
-            node {
+            node: self {
               avatar {
-                height
-                url
-                width
+                height: size
+                url: src
+                width: size
               }
               id
               name
@@ -118,10 +118,10 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
             }
           }
           id
-          categories {
-            edges {
-              node {
-                databaseId
+          categories: self {
+            edges: categories(limit: -1) {
+              node: self {
+                databaseId: id
                 id
                 name
                 slug
@@ -132,17 +132,17 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
           date
           excerpt
           featuredImage {
-            node {
+            node: self {
               altText
               caption
               id
               sizes
-              sourceUrl
+              sourceUrl: src
               srcSet
             }
           }
           modified
-          databaseId
+          databaseId: id
           title
           slug
           isSticky
