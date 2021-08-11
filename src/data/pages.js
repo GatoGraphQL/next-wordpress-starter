@@ -20,22 +20,22 @@ export const QUERY_ALL_PAGES = gql`
           }
           content
           featuredImage {
-            node {
+            node: self {
               altText
               caption
               id
               sizes
-              sourceUrl
+              sourceUrl: src
               srcSet
             }
           }
           id
           menuOrder
-          parent {
-            node {
+          parent: parentPage {
+            node: self {
               id
               slug
-              uri
+              uri: urlPath
               ... on Page {
                 title
               }
@@ -43,7 +43,7 @@ export const QUERY_ALL_PAGES = gql`
           }
           slug
           title
-          uri
+          uri: urlPath
         }
       }
     }
@@ -58,7 +58,7 @@ export const QUERY_PAGE_BY_URI = gql`
           node {
             id
             slug
-            uri
+            uri: urlPath
             ... on Page {
               id
               title
@@ -79,11 +79,11 @@ export const QUERY_PAGE_BY_URI = gql`
       }
       id
       menuOrder
-      parent {
-        node {
+      parent: parentPage {
+        node: self {
           id
           slug
-          uri
+          uri: urlPath
           ... on Page {
             title
           }
@@ -91,7 +91,7 @@ export const QUERY_PAGE_BY_URI = gql`
       }
       slug
       title
-      uri
+      uri: urlPath
     }
   }
 `;
