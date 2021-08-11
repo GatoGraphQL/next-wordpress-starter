@@ -2,15 +2,15 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_PAGES = gql`
   {
-    pages(first: 10000) {
-      edges {
-        node {
-          children {
-            edges {
-              node {
+    pages: self {
+      edges: pages(limit: 10000) {
+        node: self {
+          children: self {
+            edges: childPages(limit: -1) {
+              node: self {
                 id
                 slug
-                uri
+                uri: urlPath
                 ... on Page {
                   id
                   title
