@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const QUERY_ALL_POSTS = gql`
   query AllPosts {
     posts: self {
-      edges: posts(limit: 10000) {
+      edges: posts(limit: -1) {
         node: self {
           author {
             node: self {
@@ -103,7 +103,7 @@ export const QUERY_POST_BY_SLUG = gql`
 export const QUERY_POSTS_BY_CATEGORY_ID = gql`
   query PostsByCategoryId($categoryId: Int!) {
     posts: self {
-      edges: posts(categoryIDs: [$categoryId]) {
+      edges: posts(categoryIDs: [$categoryId], limit: -1) {
         node: self {
           author {
             node: self {
@@ -154,8 +154,8 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
 
 export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
   query PostByAuthorSlug($slug: String!) {
-    posts(where: { authorName: $slug }) {
-      edges {
+    posts: self {
+      edges: posts(authorSlug: $slug, limit: -1) {
         node {
           categories {
             edges {

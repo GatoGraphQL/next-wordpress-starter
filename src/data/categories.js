@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 export const QUERY_ALL_CATEGORIES = gql`
   {
     categories: self {
-      edges: postCategories(limit: 10000) {
+      edges: postCategories(limit: -1) {
         node: self {
           databaseId: id
           description
