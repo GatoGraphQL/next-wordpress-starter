@@ -156,11 +156,11 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
   query PostByAuthorSlug($slug: String!) {
     posts: self {
       edges: posts(authorSlug: $slug, limit: -1) {
-        node {
-          categories {
-            edges {
-              node {
-                databaseId
+        node: self {
+          categories: self {
+            edges: categories(limit: -1) {
+              node: self {
+                databaseId: id
                 id
                 name
                 slug
@@ -170,18 +170,18 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
           date
           excerpt
           featuredImage {
-            node {
+            node: self {
               altText
               caption
               id
               sizes
-              sourceUrl
+              sourceUrl: src
               srcSet
             }
           }
           id
           modified
-          databaseId
+          databaseId: id
           slug
           title
           isSticky
