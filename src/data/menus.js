@@ -15,7 +15,7 @@ export const QUERY_ALL_MENUS = gql`
                 label
                 title
                 target
-                path
+                path: localURLPath
               }
             }
           }
