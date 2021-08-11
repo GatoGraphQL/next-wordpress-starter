@@ -2,7 +2,9 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_USERS = gql`
   {
+    id
     users: self {
+      id
       edges: users(limit: -1) {
         node: self {
           avatar {

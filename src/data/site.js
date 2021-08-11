@@ -2,7 +2,9 @@ import { gql } from '@apollo/client';
 
 export const QUERY_SITE_DATA = gql`
   {
+    id
     generalSettings: self {
+      id
       description: option(name: "blogdescription")
       language: option(name: "WPLANG")
       title: option(name: "blogname")

@@ -72,7 +72,9 @@ function createApolloClient(url) {
 async function getAllPosts(apolloClient, process, verbose = false) {
   const query = gql`
     {
+      id
       posts: self {
+        id
         edges: posts(limit: -1) {
           node: self {
             title
@@ -141,7 +143,9 @@ async function getAllPosts(apolloClient, process, verbose = false) {
 async function getSiteMetadata(apolloClient, process, verbose = false) {
   const query = gql`
     {
+      id
       generalSettings: self {
+        id
         description: option(name: "blogdescription")
         language: option(name: "WPLANG")
         title: option(name: "blogname")
@@ -177,7 +181,9 @@ async function getSiteMetadata(apolloClient, process, verbose = false) {
 async function getPages(apolloClient, process, verbose = false) {
   const query = gql`
     {
+      id
       pages: self {
+        id
         edges: pages(limit: -1) {
           node: self {
             slug

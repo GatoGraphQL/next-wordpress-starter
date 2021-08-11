@@ -2,7 +2,9 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_MENUS = gql`
   {
+    id
     menus: self {
+      id
       edges: menus {
         node: self {
           id

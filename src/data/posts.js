@@ -2,7 +2,9 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_POSTS = gql`
   query AllPosts {
+    id
     posts: self {
+      id
       edges: posts(limit: -1) {
         node: self {
           author {
@@ -102,7 +104,9 @@ export const QUERY_POST_BY_SLUG = gql`
 
 export const QUERY_POSTS_BY_CATEGORY_ID = gql`
   query PostsByCategoryId($categoryId: Int!) {
+    id
     posts: self {
+      id
       edges: posts(categoryIDs: [$categoryId], limit: -1) {
         node: self {
           author {
@@ -154,7 +158,9 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
 
 export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
   query PostByAuthorSlug($slug: String!) {
+    id
     posts: self {
+      id
       edges: posts(authorSlug: $slug, limit: -1) {
         node: self {
           categories: self {
@@ -234,7 +240,9 @@ export const QUERY_POST_SEO_BY_SLUG = gql`
 
 export const QUERY_POST_PER_PAGE = gql`
   query PostPerPage {
+    id
     allSettings: self {
+      id
       readingSettingsPostsPerPage: option(name: "posts_per_page")
     }
   }

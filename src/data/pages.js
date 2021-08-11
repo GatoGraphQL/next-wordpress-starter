@@ -2,7 +2,9 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_PAGES = gql`
   {
+    id
     pages: self {
+      id
       edges: pages(limit: -1) {
         node: self {
           children: self {
