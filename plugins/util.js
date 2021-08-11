@@ -72,23 +72,23 @@ function createApolloClient(url) {
 async function getAllPosts(apolloClient, process, verbose = false) {
   const query = gql`
     {
-      posts(first: 10000) {
-        edges {
-          node {
+      posts: self {
+        edges: posts(limit: -1) {
+          node: self {
             title
             excerpt
-            databaseId
+            databaseId: id
             slug
             date
             modified
             author {
-              node {
+              node: self {
                 name
               }
             }
-            categories {
-              edges {
-                node {
+            categories: self {
+              edges: categories(limit: -1) {
+                node: self {
                   name
                 }
               }
@@ -141,10 +141,10 @@ async function getAllPosts(apolloClient, process, verbose = false) {
 async function getSiteMetadata(apolloClient, process, verbose = false) {
   const query = gql`
     {
-      generalSettings {
-        description
-        language
-        title
+      generalSettings: self {
+        description: option(name: "blogdescription")
+        language: option(name: "WPLANG")
+        title: option(name: "blogname")
       }
     }
   `;
@@ -177,9 +177,9 @@ async function getSiteMetadata(apolloClient, process, verbose = false) {
 async function getPages(apolloClient, process, verbose = false) {
   const query = gql`
     {
-      pages(first: 10000) {
-        edges {
-          node {
+      pages: self {
+        edges: pages(limit: -1) {
+          node: self {
             slug
             modified
           }
