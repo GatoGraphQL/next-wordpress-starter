@@ -234,8 +234,8 @@ export const QUERY_POST_SEO_BY_SLUG = gql`
 
 export const QUERY_POST_PER_PAGE = gql`
   query PostPerPage {
-    allSettings {
-      readingSettingsPostsPerPage
+    allSettings: self {
+      readingSettingsPostsPerPage: option(name: "posts_per_page")
     }
   }
 `;
