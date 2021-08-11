@@ -52,10 +52,10 @@ export const QUERY_ALL_PAGES = gql`
 
 export const QUERY_PAGE_BY_URI = gql`
   query PageByUri($uri: ID!) {
-    page(id: $uri, idType: URI) {
-      children {
-        edges {
-          node {
+    page: pageByPath(path: $uri) {
+      children: self {
+        edges: childPages(limit: -1) {
+          node: self {
             id
             slug
             uri: urlPath
@@ -68,12 +68,12 @@ export const QUERY_PAGE_BY_URI = gql`
       }
       content
       featuredImage {
-        node {
+        node: self {
           altText
           caption
           id
           sizes
-          sourceUrl
+          sourceUrl: src
           srcSet
         }
       }
