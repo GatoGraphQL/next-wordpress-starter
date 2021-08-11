@@ -54,13 +54,13 @@ export const QUERY_ALL_POSTS = gql`
 
 export const QUERY_POST_BY_SLUG = gql`
   query PostBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
+    post: postBySlug(slug: $slug) {
       author {
-        node {
+        node: self {
           avatar {
-            height
-            url
-            width
+            height: size
+            url: src
+            width: size
           }
           id
           name
@@ -68,10 +68,10 @@ export const QUERY_POST_BY_SLUG = gql`
         }
       }
       id
-      categories {
-        edges {
-          node {
-            databaseId
+      categories: self {
+        edges: categories(limit: -1) {
+          node: self {
+            databaseId: id
             id
             name
             slug
@@ -82,17 +82,17 @@ export const QUERY_POST_BY_SLUG = gql`
       date
       excerpt
       featuredImage {
-        node {
+        node: self {
           altText
           caption
-          sourceUrl
+          sourceUrl: src
           srcSet
           sizes
           id
         }
       }
       modified
-      databaseId
+      databaseId: id
       title
       slug
       isSticky
