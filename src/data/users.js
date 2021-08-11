@@ -2,19 +2,19 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_USERS = gql`
   {
-    users(first: 10000) {
-      edges {
-        node {
+    users: self {
+      edges: users(limit: -1) {
+        node: self {
           avatar {
-            height
-            width
-            url
+            height: size
+            width: size
+            url: src
           }
           description
           id
           name
-          roles {
-            nodes {
+          roles: self {
+            nodes: roles {
               name
             }
           }
