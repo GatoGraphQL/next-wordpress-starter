@@ -2,15 +2,15 @@ import { gql } from '@apollo/client';
 
 export const QUERY_ALL_POSTS = gql`
   query AllPosts {
-    posts(first: 10000) {
-      edges {
-        node {
+    posts: self {
+      edges: posts(limit: 10000) {
+        node: self {
           author {
-            node {
+            node: self {
               avatar {
-                height
-                url
-                width
+                height: size
+                url: src
+                width: size
               }
               id
               name
@@ -18,10 +18,10 @@ export const QUERY_ALL_POSTS = gql`
             }
           }
           id
-          categories {
-            edges {
-              node {
-                databaseId
+          categories: self {
+            edges: categories(limit: -1) {
+              node: self {
+                databaseId: id
                 id
                 name
                 slug
@@ -32,17 +32,17 @@ export const QUERY_ALL_POSTS = gql`
           date
           excerpt
           featuredImage {
-            node {
+            node: self {
               altText
               caption
-              sourceUrl
+              sourceUrl: src
               srcSet
               sizes
               id
             }
           }
           modified
-          databaseId
+          databaseId: id
           title
           slug
           isSticky
