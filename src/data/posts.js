@@ -5,7 +5,7 @@ export const QUERY_ALL_POSTS = gql`
     id
     posts: self {
       id
-      edges: posts(limit: -1) {
+      edges: posts(pagination: { limit: -1 }) {
         node: self {
           author {
             node: self {

@@ -75,7 +75,7 @@ async function getAllPosts(apolloClient, process, verbose = false) {
       id
       posts: self {
         id
-        edges: posts(limit: -1) {
+        edges: posts(pagination: { limit: -1 }) {
           node: self {
             title
             excerpt
