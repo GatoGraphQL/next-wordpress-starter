@@ -31,7 +31,7 @@ export const QUERY_ALL_POSTS = gql`
             }
           }
           content
-          date
+          date: dateAsString
           excerpt
           featuredImage {
             node: self {
@@ -43,7 +43,7 @@ export const QUERY_ALL_POSTS = gql`
               id
             }
           }
-          modified
+          modified: modifiedAsString
           databaseId: id
           title
           slug
@@ -81,7 +81,7 @@ export const QUERY_POST_BY_SLUG = gql`
         }
       }
       content
-      date
+      date: dateAsString
       excerpt
       featuredImage {
         node: self {
@@ -93,7 +93,7 @@ export const QUERY_POST_BY_SLUG = gql`
           id
         }
       }
-      modified
+      modified: modifiedAsString
       databaseId: id
       title
       slug
@@ -133,7 +133,7 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
             }
           }
           content
-          date
+          date: dateAsString
           excerpt
           featuredImage {
             node: self {
@@ -145,7 +145,7 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
               srcSet
             }
           }
-          modified
+          modified: modifiedAsString
           databaseId: id
           title
           slug
@@ -173,7 +173,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
               }
             }
           }
-          date
+          date: dateAsString
           excerpt
           featuredImage {
             node: self {
@@ -186,7 +186,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
             }
           }
           id
-          modified
+          modified: modifiedAsString
           databaseId: id
           slug
           title
