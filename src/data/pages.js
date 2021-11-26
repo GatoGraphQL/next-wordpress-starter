@@ -5,10 +5,10 @@ export const QUERY_ALL_PAGES = gql`
     id
     pages: self {
       id
-      edges: pages(limit: -1) {
+      edges: pages(pagination: { limit: -1 }) {
         node: self {
           children: self {
-            edges: childPages(limit: -1) {
+            edges: childPages(pagination: { limit: -1 }) {
               node: self {
                 id
                 slug
@@ -54,9 +54,9 @@ export const QUERY_ALL_PAGES = gql`
 
 export const QUERY_PAGE_BY_URI = gql`
   query PageByUri($uri: ID!) {
-    page: pageByPath(path: $uri) {
+    page: page(by: { path: $uri }) {
       children: self {
-        edges: childPages(limit: -1) {
+        edges: childPages(pagination: { limit: -1 }) {
           node: self {
             id
             slug
@@ -100,7 +100,7 @@ export const QUERY_PAGE_BY_URI = gql`
 
 export const QUERY_PAGE_SEO_BY_URI = gql`
   query PageSEOByUri($uri: ID!) {
-    page(id: $uri, idType: URI) {
+    page(by: { id: $uri }) {
       id
       seo {
         canonical

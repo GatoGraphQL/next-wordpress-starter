@@ -5,7 +5,7 @@ export const QUERY_ALL_CATEGORIES = gql`
     id
     categories: self {
       id
-      edges: postCategories(limit: -1) {
+      edges: postCategories(pagination: { limit: -1 }) {
         node: self {
           databaseId: id
           description
@@ -20,7 +20,7 @@ export const QUERY_ALL_CATEGORIES = gql`
 
 export const QUERY_CATEGORY_BY_SLUG = gql`
   query CategoryBySlug($slug: String!) {
-    category: postCategoryBySlug(slug: $slug) {
+    category: postCategory(by: { slug: $slug }) {
       databaseId: id
       description
       id
@@ -32,7 +32,7 @@ export const QUERY_CATEGORY_BY_SLUG = gql`
 
 export const QUERY_CATEGORY_SEO_BY_SLUG = gql`
   query CategorySEOBySlug($slug: String!) {
-    category: postCategoryBySlug(slug: $slug) {
+    category: postCategory(by: { slug: $slug }) {
       id
       seo {
         #TODO: This field is not yet supported

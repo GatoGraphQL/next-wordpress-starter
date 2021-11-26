@@ -89,7 +89,7 @@ async function getAllPosts(apolloClient, process, verbose = false) {
               }
             }
             categories: self {
-              edges: categories(limit: -1) {
+              edges: categories(pagination: { limit: -1 }) {
                 node: self {
                   name
                 }
@@ -184,7 +184,7 @@ async function getPages(apolloClient, process, verbose = false) {
       id
       pages: self {
         id
-        edges: pages(limit: -1) {
+        edges: pages(pagination: { limit: -1 }) {
           node: self {
             slug
             modified

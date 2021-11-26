@@ -21,7 +21,7 @@ export const QUERY_ALL_POSTS = gql`
           }
           id
           categories: self {
-            edges: categories(limit: -1) {
+            edges: categories(pagination: { limit: -1 }) {
               node: self {
                 databaseId: id
                 id
@@ -56,7 +56,7 @@ export const QUERY_ALL_POSTS = gql`
 
 export const QUERY_POST_BY_SLUG = gql`
   query PostBySlug($slug: ID!) {
-    post: postBySlug(slug: $slug) {
+    post: post(by: { slug: $slug }) {
       author {
         node: self {
           avatar {
@@ -71,7 +71,7 @@ export const QUERY_POST_BY_SLUG = gql`
       }
       id
       categories: self {
-        edges: categories(limit: -1) {
+        edges: categories(pagination: { limit: -1 }) {
           node: self {
             databaseId: id
             id
@@ -107,7 +107,7 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
     id
     posts: self {
       id
-      edges: posts(categoryIDs: [$categoryId], limit: -1) {
+      edges: posts(filter: { categoryIDs: [$categoryId] }, pagination: { limit: -1 }) {
         node: self {
           author {
             node: self {
@@ -123,7 +123,7 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
           }
           id
           categories: self {
-            edges: categories(limit: -1) {
+            edges: categories(pagination: { limit: -1 }) {
               node: self {
                 databaseId: id
                 id
@@ -161,10 +161,10 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
     id
     posts: self {
       id
-      edges: posts(authorSlug: $slug, limit: -1) {
+      edges: posts(filter: { authorSlug: $slug }, pagination: { limit: -1 }) {
         node: self {
           categories: self {
-            edges: categories(limit: -1) {
+            edges: categories(pagination: { limit: -1 }) {
               node: self {
                 databaseId: id
                 id
@@ -199,7 +199,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
 
 export const QUERY_POST_SEO_BY_SLUG = gql`
   query PostSEOBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
+    post(by: { id: $slug }) {
       id
       seo {
         canonical

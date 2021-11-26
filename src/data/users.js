@@ -5,7 +5,7 @@ export const QUERY_ALL_USERS = gql`
     id
     users: self {
       id
-      edges: users(limit: -1) {
+      edges: users(pagination: { limit: -1 }) {
         node: self {
           avatar {
             height: size
@@ -29,9 +29,9 @@ export const QUERY_ALL_USERS = gql`
 
 export const QUERY_ALL_USERS_SEO = gql`
   {
-    users(first: 10000) {
-      edges {
-        node {
+    users: self {
+      edges: users(pagination: { limit: -1 }) {
+        node: self {
           id
           seo {
             metaDesc
