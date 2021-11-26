@@ -5,7 +5,7 @@ export const QUERY_ALL_PAGES = gql`
     id
     pages: self {
       id
-      edges: pages(pagination: { limit: -1 }) {
+      edges: pages(filter: { hasPassword: false }, pagination: { limit: -1 }) {
         node: self {
           children: self {
             edges: childPages(pagination: { limit: -1 }) {

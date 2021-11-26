@@ -10,6 +10,7 @@ import { findMenuByLocation, MENU_LOCATION_NAVIGATION_DEFAULT } from 'lib/menus'
 import Section from 'components/Section';
 
 import styles from './Nav.module.scss';
+import NavListItem from 'components/NavListItem';
 
 const SEARCH_VISIBLE = 'visible';
 const SEARCH_HIDDEN = 'hidden';
@@ -184,42 +185,8 @@ const Nav = () => {
           </Link>
         </p>
         <ul className={styles.navMenu}>
-          {navigation?.map(({ id, path, label, title, target, children }) => {
-            return (
-              <li key={id}>
-                {!path.includes('http') && !target && (
-                  <Link href={path}>
-                    <a title={title}>{label}</a>
-                  </Link>
-                )}
-                {path.includes('http') && (
-                  <a href={path} title={title} target={target}>
-                    {label}
-                  </a>
-                )}
-
-                {children?.length > 0 && (
-                  <ul className={styles.navSubMenu}>
-                    {children.map(({ id, path, label, title, target }) => {
-                      return (
-                        <li key={id}>
-                          {!path.includes('http') && !target && (
-                            <Link href={path}>
-                              <a title={title}>{label}</a>
-                            </Link>
-                          )}
-                          {path.includes('http') && (
-                            <a href={path} title={title} target={target}>
-                              {label}
-                            </a>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </li>
-            );
+          {navigation?.map((listItem) => {
+            return <NavListItem key={listItem.id} className={styles.navSubMenu} item={listItem} />;
           })}
         </ul>
         <div className={styles.navSearch}>

@@ -1,7 +1,7 @@
 # Next.js WordPress Starter
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Scaling WordPress with the power of [Next.js](https://nextjs.org/) and the static web!
@@ -28,7 +28,7 @@ WORDPRESS_GRAPHQL_ENDPOINT="http://wordpressite.com/graphql"
 
 ### What is this and what does it include?
 
-The goal of this project is to take WordPress as a headless CMS and use Next.js to create a static experience without any 3rd party services that can be deployed anywhere. 
+The goal of this project is to take WordPress as a headless CMS and use Next.js to create a static experience without any 3rd party services that can be deployed anywhere.
 
 The hope is to build out as many features as we can to support what's typically expected from an out of the box theme on WordPress. Currently, those features include:
 * Blog (https://next-wordpress-starter.spacejelly.dev)
@@ -105,6 +105,18 @@ To set up the [ESLint extension](https://marketplace.visualstudio.com/items?item
 ```
 
 With this file ESLint will automatically fix and validate syntax errors and format the code on save (based on Prettier configuration).
+
+### Deployment
+
+#### Netlify
+
+There are two options as to how you can deploy this project to Netlify:
+* [Essential Next.js Plugin](https://github.com/netlify/netlify-plugin-nextjs) (recommended)
+* [Exporting the project](https://nextjs.org/docs/advanced-features/static-html-export) via `next export`
+
+**Essential Next.js Plugin** should be provided as an option when you're first importing a project based on this starter. If it's not, you can install this plugin using the Netlify Plugins directory. This will allow the project to take full advantage of all native Next.js features that Netlify supports with this plugin.
+
+**Exporting the project** let's Next.js compile the project into static assets including HTML files. This allows you to deploy the project as a static site directly to Netlify just like any other site. You can do this by adding `next export` to the end of the `build` command inside `package.json` (ex: `next build && next export`).
 
 ## 🛠 Configuring Your Project
 
@@ -188,6 +200,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://bradgarropy.com"><img src="https://avatars.githubusercontent.com/u/11336745?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Brad Garropy</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=bradgarropy" title="Code">💻</a></td>
     <td align="center"><a href="http://ffabiosales.github.io"><img src="https://avatars.githubusercontent.com/u/1392528?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fábio Sales</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=ffabiosales" title="Code">💻</a></td>
     <td align="center"><a href="https://leoloso.com"><img src="https://avatars.githubusercontent.com/u/1981996?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Leonardo Losoviz</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=leoloso" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.avneesh.tech/"><img src="https://avatars.githubusercontent.com/u/76690419?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Avneesh Agarwal</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=avneesh0612" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/PhattOZ"><img src="https://avatars.githubusercontent.com/u/63938605?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Phattarapol L.</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=PhattOZ" title="Code">💻</a></td>
+    <td align="center"><a href="https://capecod.world"><img src="https://avatars.githubusercontent.com/u/26460352?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Peter Cruckshank</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=petercr" title="Code">💻</a></td>
+    <td align="center"><a href="https://ogrady.ie"><img src="https://avatars.githubusercontent.com/u/130415?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shane O'Grady</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=shaneog" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://roundhouse-designs.com"><img src="https://avatars.githubusercontent.com/u/665784?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Nick Gaswirth</b></sub></a><br /><a href="https://github.com/colbyfayock/next-wordpress-starter/commits?author=gaswirth" title="Code">💻</a></td>
   </tr>
 </table>
 

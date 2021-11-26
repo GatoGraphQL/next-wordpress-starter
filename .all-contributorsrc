@@ -95,6 +95,51 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "avneesh0612",
+      "name": "Avneesh Agarwal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76690419?v=4",
+      "profile": "https://www.avneesh.tech/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "PhattOZ",
+      "name": "Phattarapol L.",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63938605?v=4",
+      "profile": "https://github.com/PhattOZ",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "petercr",
+      "name": "Peter Cruckshank",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26460352?v=4",
+      "profile": "https://capecod.world",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "shaneog",
+      "name": "Shane O'Grady",
+      "avatar_url": "https://avatars.githubusercontent.com/u/130415?v=4",
+      "profile": "https://ogrady.ie",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gaswirth",
+      "name": "Nick Gaswirth",
+      "avatar_url": "https://avatars.githubusercontent.com/u/665784?v=4",
+      "profile": "https://roundhouse-designs.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

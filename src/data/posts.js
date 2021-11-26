@@ -5,7 +5,7 @@ export const QUERY_ALL_POSTS = gql`
     id
     posts: self {
       id
-      edges: posts(pagination: { limit: -1 }) {
+      edges: posts(filter: { hasPassword: false }, pagination: { limit: -1 }) {
         node: self {
           author {
             node: self {
@@ -107,7 +107,7 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { categoryIDs: [$categoryId] }, pagination: { limit: -1 }) {
+      edges: posts(filter: { hasPassword: false, categoryIDs: [$categoryId] }, pagination: { limit: -1 }) {
         node: self {
           author {
             node: self {
@@ -161,7 +161,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { authorSlug: $slug }, pagination: { limit: -1 }) {
+      edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
         node: self {
           categories: self {
             edges: categories(pagination: { limit: -1 }) {
