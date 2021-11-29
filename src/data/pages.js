@@ -8,7 +8,7 @@ export const QUERY_ALL_PAGES = gql`
       edges: pages(filter: { hasPassword: false }, pagination: { limit: -1 }) {
         node: self {
           children: self {
-            edges: childPages(pagination: { limit: -1 }) {
+            edges: children(pagination: { limit: -1 }) {
               node: self {
                 id
                 slug
@@ -33,7 +33,7 @@ export const QUERY_ALL_PAGES = gql`
           }
           id
           menuOrder
-          parent: parentPage {
+          parent: parent {
             node: self {
               id
               slug
@@ -56,7 +56,7 @@ export const QUERY_PAGE_BY_URI = gql`
   query PageByUri($uri: ID!) {
     page: page(by: { path: $uri }) {
       children: self {
-        edges: childPages(pagination: { limit: -1 }) {
+        edges: children(pagination: { limit: -1 }) {
           node: self {
             id
             slug
@@ -81,7 +81,7 @@ export const QUERY_PAGE_BY_URI = gql`
       }
       id
       menuOrder
-      parent: parentPage {
+      parent: parent {
         node: self {
           id
           slug
