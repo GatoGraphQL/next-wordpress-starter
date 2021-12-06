@@ -12,7 +12,7 @@ export const QUERY_ALL_PAGES = gql`
               node: self {
                 id
                 slug
-                uri: urlPath
+                uri: urlAbsolutePath
                 ... on Page {
                   id
                   title
@@ -37,7 +37,7 @@ export const QUERY_ALL_PAGES = gql`
             node: self {
               id
               slug
-              uri: urlPath
+              uri: urlAbsolutePath
               ... on Page {
                 title
               }
@@ -45,7 +45,7 @@ export const QUERY_ALL_PAGES = gql`
           }
           slug
           title
-          uri: urlPath
+          uri: urlAbsolutePath
         }
       }
     }
@@ -60,7 +60,7 @@ export const QUERY_PAGE_BY_URI = gql`
           node: self {
             id
             slug
-            uri: urlPath
+            uri: urlAbsolutePath
             ... on Page {
               id
               title
@@ -85,7 +85,7 @@ export const QUERY_PAGE_BY_URI = gql`
         node: self {
           id
           slug
-          uri: urlPath
+          uri: urlAbsolutePath
           ... on Page {
             title
           }
@@ -93,7 +93,7 @@ export const QUERY_PAGE_BY_URI = gql`
       }
       slug
       title
-      uri: urlPath
+      uri: urlAbsolutePath
     }
   }
 `;
