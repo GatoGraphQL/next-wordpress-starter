@@ -7,7 +7,7 @@ export const PAGE_FIELDS = gql`
         node: self {
           id
           slug
-          uri: urlAbsolutePath
+          uri: urlPath
           ... on Page {
             id
             title
@@ -21,7 +21,7 @@ export const PAGE_FIELDS = gql`
       node: self {
         id
         slug
-        uri: urlAbsolutePath
+        uri: urlPath
         ... on Page {
           title
         }
@@ -29,7 +29,7 @@ export const PAGE_FIELDS = gql`
     }
     slug
     title
-    uri: urlAbsolutePath
+    uri: urlPath
   }
 `;
 
@@ -95,7 +95,7 @@ export const QUERY_PAGE_BY_URI = gql`
           node: self {
             id
             slug
-            uri: urlAbsolutePath
+            uri: urlPath
             ... on Page {
               id
               title
@@ -120,7 +120,7 @@ export const QUERY_PAGE_BY_URI = gql`
         node: self {
           id
           slug
-          uri: urlAbsolutePath
+          uri: urlPath
           ... on Page {
             title
           }
@@ -128,7 +128,7 @@ export const QUERY_PAGE_BY_URI = gql`
       }
       slug
       title
-      uri: urlAbsolutePath
+      uri: urlPath
     }
   }
 `;
