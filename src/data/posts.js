@@ -337,7 +337,7 @@ export const QUERY_POST_PER_PAGE = gql`
     id
     allSettings: self {
       id
-      readingSettingsPostsPerPage: option(name: "posts_per_page")
+      readingSettingsPostsPerPage: optionValue(name: "posts_per_page")
     }
   }
 `;
