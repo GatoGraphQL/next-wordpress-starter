@@ -81,7 +81,7 @@ async function getAllPosts(apolloClient, process, verbose = false) {
             excerpt
             databaseId: id
             slug
-            date
+            date: dateStr
             modified: modifiedDateStr
             author {
               node: self {
