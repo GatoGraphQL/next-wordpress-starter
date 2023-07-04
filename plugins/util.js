@@ -187,7 +187,7 @@ async function getPages(apolloClient, process, verbose = false) {
         edges: pages(pagination: { limit: -1 }) {
           node: self {
             slug
-            modified
+            modified: modifiedDateStr
           }
         }
       }
