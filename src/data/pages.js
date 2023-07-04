@@ -1,25 +1,75 @@
 import { gql } from '@apollo/client';
 
+export const PAGE_FIELDS = gql`
+  fragment PageFields on Page {
+    children: self {
+      edges: children(pagination: { limit: -1 }) {
+        node: self {
+          id
+          slug
+          uri: urlAbsolutePath
+          ... on Page {
+            id
+            title
+          }
+        }
+      }
+    }
+    id
+    menuOrder
+    parent {
+      node: self {
+        id
+        slug
+        uri: urlAbsolutePath
+        ... on Page {
+          title
+        }
+      }
+    }
+    slug
+    title
+    uri: urlAbsolutePath
+  }
+`;
+
+export const QUERY_ALL_PAGES_INDEX = gql`
+  ${PAGE_FIELDS}
+  query AllPagesIndex {
+    pages: self {
+      id
+      edges: pages(filter: { hasPassword: false }, pagination: { limit: -1 }) {
+        node: self {
+          ...PageFields
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_PAGES_ARCHIVE = gql`
+  ${PAGE_FIELDS}
+  query AllPagesIndex {
+    pages: self {
+      id
+      edges: pages(filter: { hasPassword: false }, pagination: { limit: -1 }) {
+        node: self {
+          ...PageFields
+        }
+      }
+    }
+  }
+`;
+
 export const QUERY_ALL_PAGES = gql`
-  {
+  ${PAGE_FIELDS}
+  query AllPagesIndex {
     id
     pages: self {
       id
       edges: pages(filter: { hasPassword: false }, pagination: { limit: -1 }) {
         node: self {
-          children: self {
-            edges: children(pagination: { limit: -1 }) {
-              node: self {
-                id
-                slug
-                uri: urlAbsolutePath
-                ... on Page {
-                  id
-                  title
-                }
-              }
-            }
-          }
+          ...PageFields
           content
           featuredImage {
             node: self {
@@ -31,21 +81,6 @@ export const QUERY_ALL_PAGES = gql`
               srcSet
             }
           }
-          id
-          menuOrder
-          parent: parent {
-            node: self {
-              id
-              slug
-              uri: urlAbsolutePath
-              ... on Page {
-                title
-              }
-            }
-          }
-          slug
-          title
-          uri: urlAbsolutePath
         }
       }
     }

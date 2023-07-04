@@ -1,12 +1,49 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_ALL_POSTS = gql`
-  query AllPosts {
+export const POST_FIELDS = gql`
+  fragment PostFields on Post {
     id
+    categories: self {
+      edges: categories(pagination: { limit: -1 }) {
+        node: self {
+          databaseId: id
+          id
+          name
+          slug
+        }
+      }
+    }
+    databaseId: id
+    date: dateStr
+    isSticky
+    postId: id
+    slug
+    title
+  }
+`;
+
+export const QUERY_ALL_POSTS_INDEX = gql`
+  ${POST_FIELDS}
+  query AllPostsIndex {
     posts: self {
       id
       edges: posts(filter: { hasPassword: false }, pagination: { limit: -1 }) {
         node: self {
+          ...PostFields
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_POSTS_ARCHIVE = gql`
+  ${POST_FIELDS}
+  query AllPostsArchive {
+    posts: self {
+      id
+      edges: posts(filter: { hasPassword: false }, pagination: { limit: -1 }) {
+        node: self {
+          ...PostFields
           author {
             node: self {
               avatar {
@@ -19,19 +56,34 @@ export const QUERY_ALL_POSTS = gql`
               slug
             }
           }
-          id
-          categories: self {
-            edges: categories(pagination: { limit: -1 }) {
-              node: self {
-                databaseId: id
-                id
-                name
-                slug
+          excerpt
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_POSTS = gql`
+  ${POST_FIELDS}
+  query AllPosts {
+    posts: self {
+      id
+      edges: posts(filter: { hasPassword: false }, pagination: { limit: -1 }) {
+        node: self {
+          ...PostFields
+          author {
+            node: self {
+              avatar {
+                height: size
+                url: src
+                width: size
               }
+              id
+              name
+              slug
             }
           }
           content
-          date: dateAsString
           excerpt
           featuredImage {
             node: self {
@@ -43,11 +95,7 @@ export const QUERY_ALL_POSTS = gql`
               id
             }
           }
-          modified: modifiedAsString
-          databaseId: id
-          title
-          slug
-          isSticky
+          modified: modifiedDateStr
         }
       }
     }
@@ -81,7 +129,7 @@ export const QUERY_POST_BY_SLUG = gql`
         }
       }
       content
-      date: dateAsString
+      date: dateStr
       excerpt
       featuredImage {
         node: self {
@@ -93,7 +141,7 @@ export const QUERY_POST_BY_SLUG = gql`
           id
         }
       }
-      modified: modifiedAsString
+      modified: modifiedDateStr
       databaseId: id
       title
       slug
@@ -102,13 +150,30 @@ export const QUERY_POST_BY_SLUG = gql`
   }
 `;
 
-export const QUERY_POSTS_BY_CATEGORY_ID = gql`
+export const QUERY_POSTS_BY_CATEGORY_ID_INDEX = gql`
+  ${POST_FIELDS}
   query PostsByCategoryId($categoryId: Int!) {
     id
     posts: self {
       id
       edges: posts(filter: { hasPassword: false, categoryIDs: [$categoryId] }, pagination: { limit: -1 }) {
         node: self {
+          ...PostFields
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE = gql`
+  ${POST_FIELDS}
+  query PostsByCategoryId($categoryId: Int!) {
+    id
+    posts: self {
+      id
+      edges: posts(filter: { hasPassword: false, categoryIDs: [$categoryId] }, pagination: { limit: -1 }) {
+        node: self {
+          ...PostFields
           author {
             node: self {
               avatar {
@@ -121,19 +186,35 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
               slug
             }
           }
-          id
-          categories: self {
-            edges: categories(pagination: { limit: -1 }) {
-              node: self {
-                databaseId: id
-                id
-                name
-                slug
+          excerpt
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_POSTS_BY_CATEGORY_ID = gql`
+  ${POST_FIELDS}
+  query PostsByCategoryId($categoryId: Int!) {
+    id
+    posts: self {
+      id
+      edges: posts(filter: { hasPassword: false, categoryIDs: [$categoryId] }, pagination: { limit: -1 }) {
+        node: self {
+          ...PostFields
+          author {
+            node: self {
+              avatar {
+                height: size
+                url: src
+                width: size
               }
+              id
+              name
+              slug
             }
           }
           content
-          date: dateAsString
           excerpt
           featuredImage {
             node: self {
@@ -145,11 +226,38 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
               srcSet
             }
           }
-          modified: modifiedAsString
-          databaseId: id
-          title
-          slug
-          isSticky
+          modified: modifiedDateStr
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_POSTS_BY_AUTHOR_SLUG_INDEX = gql`
+  ${POST_FIELDS}
+  query PostByAuthorSlugIndex($slug: String!) {
+    id
+    posts: self {
+      id
+      edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
+        node: self {
+          ...PostFields
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE = gql`
+  ${POST_FIELDS}
+  query PostByAuthorSlugArchive($slug: String!) {
+    id
+    posts: self {
+      id
+      edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
+        node: self {
+          ...PostFields
+          excerpt
         }
       }
     }
@@ -157,23 +265,14 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
 `;
 
 export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
+  ${POST_FIELDS}
   query PostByAuthorSlug($slug: String!) {
     id
     posts: self {
       id
       edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
         node: self {
-          categories: self {
-            edges: categories(pagination: { limit: -1 }) {
-              node: self {
-                databaseId: id
-                id
-                name
-                slug
-              }
-            }
-          }
-          date: dateAsString
+          ...PostFields
           excerpt
           featuredImage {
             node: self {
@@ -185,12 +284,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
               srcSet
             }
           }
-          id
-          modified: modifiedAsString
-          databaseId: id
-          slug
-          title
-          isSticky
+          modified: modifiedDateStr
         }
       }
     }
