@@ -82,7 +82,7 @@ async function getAllPosts(apolloClient, process, verbose = false) {
             databaseId: id
             slug
             date
-            modified
+            modified: modifiedDateStr
             author {
               node: self {
                 name
