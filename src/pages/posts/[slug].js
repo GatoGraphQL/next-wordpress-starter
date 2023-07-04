@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Helmet } from 'react-helmet';
 
-import { getPostBySlug, getAllPosts, getRelatedPosts, postPathBySlug } from 'lib/posts';
+import { getPostBySlug, getRecentPosts, getRelatedPosts, postPathBySlug } from 'lib/posts';
 import { categoryPathBySlug } from 'lib/categories';
 import { formatDate } from 'lib/datetime';
 import { ArticleJsonLd } from 'lib/json-ld';
@@ -19,7 +19,7 @@ import FeaturedImage from 'components/FeaturedImage';
 
 import styles from 'styles/pages/Post.module.scss';
 
-export default function Post({ post, socialImage, relatedPosts }) {
+export default function Post({ post, socialImage, related }) {
   const {
     title,
     metaTitle,
@@ -62,7 +62,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
     compactCategories: false,
   };
 
-  const { posts: relatedPostsList, title: relatedPostsTitle } = relatedPosts;
+  const { posts: relatedPostsList, title: relatedPostsTitle } = related || {};
 
   const helmetSettings = helmetSettingsFromMetadata(metadata);
 
@@ -112,14 +112,11 @@ export default function Post({ post, socialImage, relatedPosts }) {
       <Section className={styles.postFooter}>
         <Container>
           <p className={styles.postModified}>Last updated on {formatDate(modified)}.</p>
-          {!!relatedPostsList.length && (
+          {Array.isArray(relatedPostsList) && relatedPostsList.length > 0 && (
             <div className={styles.relatedPosts}>
               {relatedPostsTitle.name ? (
                 <span>
-                  More from{' '}
-                  <Link href={relatedPostsTitle.link}>
-                    <a>{relatedPostsTitle.name}</a>
-                  </Link>
+                  More from <Link href={relatedPostsTitle.link}>{relatedPostsTitle.name}</Link>
                 </span>
               ) : (
                 <span>More Posts</span>
@@ -127,9 +124,7 @@ export default function Post({ post, socialImage, relatedPosts }) {
               <ul>
                 {relatedPostsList.map((post) => (
                   <li key={post.title}>
-                    <Link href={postPathBySlug(post.slug)}>
-                      <a>{post.title}</a>
-                    </Link>
+                    <Link href={postPathBySlug(post.slug)}>{post.title}</Link>
                   </li>
                 ))}
               </ul>
@@ -144,29 +139,49 @@ export default function Post({ post, socialImage, relatedPosts }) {
 export async function getStaticProps({ params = {} } = {}) {
   const { post } = await getPostBySlug(params?.slug);
 
-  const socialImage = `${process.env.OG_IMAGE_DIRECTORY}/${params?.slug}.png`;
+  if (!post) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
 
   const { categories, databaseId: postId } = post;
-  const category = categories.length && categories[0];
-  let { name, slug } = category;
+
+  const props = {
+    post,
+    socialImage: `${process.env.OG_IMAGE_DIRECTORY}/${params?.slug}.png`,
+  };
+
+  const { category: relatedCategory, posts: relatedPosts } = (await getRelatedPosts(categories, postId)) || {};
+  const hasRelated = relatedCategory && Array.isArray(relatedPosts) && relatedPosts.length;
+
+  if (hasRelated) {
+    props.related = {
+      posts: relatedPosts,
+      title: {
+        name: relatedCategory.name || null,
+        link: categoryPathBySlug(relatedCategory.slug),
+      },
+    };
+  }
 
   return {
-    props: {
-      post,
-      socialImage,
-      relatedPosts: {
-        posts: await getRelatedPosts(category, postId),
-        title: {
-          name: name || null,
-          link: categoryPathBySlug(slug),
-        },
-      },
-    },
+    props,
   };
 }
 
 export async function getStaticPaths() {
-  const { posts } = await getAllPosts();
+  // Only render the most recent posts to avoid spending unecessary time
+  // querying every single post from WordPress
+
+  // Tip: this can be customized to use data or analytitcs to determine the
+  // most popular posts and render those instead
+
+  const { posts } = await getRecentPosts({
+    count: process.env.POSTS_PRERENDER_COUNT, // Update this value in next.config.js!
+    queryIncludes: 'index',
+  });
 
   const paths = posts
     .filter(({ slug }) => typeof slug === 'string')
@@ -178,6 +193,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 }

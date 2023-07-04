@@ -51,6 +51,8 @@ export async function getCategoryBySlug(slug) {
     throw e;
   }
 
+  if (!categoryData?.data.category) return { category: undefined };
+
   const category = mapCategoryData(categoryData?.data.category);
 
   // If the SEO plugin is enabled, look up the data
@@ -70,7 +72,7 @@ export async function getCategoryBySlug(slug) {
       throw e;
     }
 
-    const { seo = {} } = seoData?.data?.category;
+    const { seo = {} } = seoData?.data?.category || {};
 
     category.title = seo.title;
     category.description = seo.metaDesc;

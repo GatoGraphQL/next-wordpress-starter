@@ -1,4 +1,4 @@
-import { getAllAuthors, getUserByNameSlug, userSlugByName } from 'lib/users';
+import { getUserByNameSlug } from 'lib/users';
 import { getPostsByAuthorSlug } from 'lib/posts';
 import { AuthorJsonLd } from 'lib/json-ld';
 import usePageMetadata from 'hooks/use-page-metadata';
@@ -38,7 +38,19 @@ export default function Author({ user, posts }) {
 
 export async function getStaticProps({ params = {} } = {}) {
   const { user } = await getUserByNameSlug(params?.slug);
-  const { posts } = await getPostsByAuthorSlug(user?.slug);
+
+  if (!user) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+
+  const { posts } = await getPostsByAuthorSlug({
+    slug: user?.slug,
+    queryIncludes: 'archive',
+  });
+
   return {
     props: {
       user,
@@ -48,19 +60,32 @@ export async function getStaticProps({ params = {} } = {}) {
 }
 
 export async function getStaticPaths() {
-  const { authors } = await getAllAuthors();
+  // By default, we don't render any Author pages as they're
+  // we're considering them non-critical pages
 
-  const paths = authors.map((author) => {
-    const { name } = author;
-    return {
-      params: {
-        slug: userSlugByName(name),
-      },
-    };
-  });
+  // To enable pre-rendering of Author pages:
+
+  // 1. Add import to the top of the file
+  //
+  // import { getAllAuthors, userSlugByName } from 'lib/users';
+
+  // 2. Uncomment the below
+  //
+  // const { authors } = await getAllAuthors();
+
+  // const paths = authors.map((author) => {
+  //   const { name } = author;
+  //   return {
+  //     params: {
+  //       slug: userSlugByName(name),
+  //     },
+  //   };
+  // });
+
+  // 3. Update `paths` in the return statement below to reference the `paths` constant above
 
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   };
 }

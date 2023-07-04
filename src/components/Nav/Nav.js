@@ -23,10 +23,8 @@ const Nav = () => {
   const { metadata = {}, menus } = useSite();
   const { title } = metadata;
 
-  const navigation = findMenuByLocation(menus, [
-    process.env.WORDPRESS_MENU_LOCATION_NAVIGATION,
-    MENU_LOCATION_NAVIGATION_DEFAULT,
-  ]);
+  const navigationLocation = process.env.WORDPRESS_MENU_LOCATION_NAVIGATION || MENU_LOCATION_NAVIGATION_DEFAULT;
+  const navigation = findMenuByLocation(menus, navigationLocation);
 
   const { query, results, search, clearSearch, state } = useSearch({
     maxResults: 5,
@@ -180,9 +178,7 @@ const Nav = () => {
     <nav className={styles.nav}>
       <Section className={styles.navSection}>
         <p className={styles.navName}>
-          <Link href="/">
-            <a>{title}</a>
-          </Link>
+          <Link href="/">{title}</Link>
         </p>
         <ul className={styles.navMenu}>
           {navigation?.map((listItem) => {
@@ -214,7 +210,7 @@ const Nav = () => {
                       return (
                         <li key={slug}>
                           <Link tabIndex={index} href={postPathBySlug(slug)}>
-                            <a>{title}</a>
+                            {title}
                           </Link>
                         </li>
                       );

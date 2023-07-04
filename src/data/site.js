@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const QUERY_SITE_DATA = gql`
-  {
+  query SiteData {
     id
     generalSettings: self {
       id
@@ -13,7 +13,7 @@ export const QUERY_SITE_DATA = gql`
 `;
 
 export const QUERY_SEO_DATA = gql`
-  {
+  query SeoData {
     seo {
       webmaster {
         yandexVerify

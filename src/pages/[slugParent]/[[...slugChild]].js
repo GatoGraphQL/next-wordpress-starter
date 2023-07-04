@@ -87,9 +87,7 @@ export default function Page({ page, breadcrumbs }) {
                   {children.map((child) => {
                     return (
                       <li key={child.id}>
-                        <Link href={child.uri}>
-                          <a>{child.title}</a>
-                        </Link>
+                        <Link href={child.uri}>{child.title}</Link>
                       </li>
                     );
                   })}
@@ -120,12 +118,21 @@ export async function getStaticProps({ params = {} } = {}) {
 
   const { page } = await getPageByUri(pageUri);
 
+  if (!page) {
+    return {
+      props: {},
+      notFound: true,
+    };
+  }
+
   // In order to show the proper breadcrumbs, we need to find the entire
   // tree of pages. Rather than querying every segment, the query should
   // be cached for all pages, so we can grab that and use it to create
   // our trail
 
-  const { pages } = await getAllPages();
+  const { pages } = await getAllPages({
+    queryIncludes: 'index',
+  });
 
   const breadcrumbs = getBreadcrumbsByUri(pageUri, pages);
 
@@ -138,14 +145,19 @@ export async function getStaticProps({ params = {} } = {}) {
 }
 
 export async function getStaticPaths() {
-  const { pages } = await getAllPages();
+  const { pages } = await getAllPages({
+    queryIncludes: 'index',
+  });
 
   // Take all the pages and create path params. The slugParent will always be
   // the top level parent page, where the slugChild will be an array of the
   // remaining segments to make up the path or URI
 
+  // We also filter out the `/` homepage as it will conflict with index.js if
+  // as they have the same path, which will fail the build
+
   const paths = pages
-    .filter(({ uri }) => typeof uri === 'string')
+    .filter(({ uri }) => typeof uri === 'string' && uri !== '/')
     .map(({ uri }) => {
       const segments = uri.split('/').filter((seg) => seg !== '');
 
@@ -159,6 +171,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: 'blocking',
   };
 }

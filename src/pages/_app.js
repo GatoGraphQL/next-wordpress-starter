@@ -5,12 +5,12 @@ import { SearchProvider } from 'hooks/use-search';
 
 import { getSiteMetadata } from 'lib/site';
 import { getRecentPosts } from 'lib/posts';
-import { getTopLevelPages } from 'lib/pages';
 import { getCategories } from 'lib/categories';
 import NextNProgress from 'nextjs-progressbar';
-import { getAllMenus, createMenuFromPages, MENU_LOCATION_NAVIGATION_DEFAULT } from 'lib/menus';
+import { getAllMenus } from 'lib/menus';
 
 import 'styles/globals.scss';
+import 'styles/wordpress.scss';
 import variables from 'styles/_variables.module.scss';
 
 function App({ Component, pageProps = {}, metadata, recentPosts, categories, menus }) {
@@ -36,20 +36,14 @@ App.getInitialProps = async function (appContext) {
 
   const { posts: recentPosts } = await getRecentPosts({
     count: 5,
+    queryIncludes: 'index',
   });
 
   const { categories } = await getCategories({
     count: 5,
   });
 
-  const { menus } = await getAllMenus();
-
-  const defaultNavigation = createMenuFromPages({
-    locations: [MENU_LOCATION_NAVIGATION_DEFAULT],
-    pages: await getTopLevelPages(),
-  });
-
-  menus.push(defaultNavigation);
+  const { menus = [] } = await getAllMenus();
 
   return {
     ...appProps,
