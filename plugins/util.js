@@ -146,9 +146,9 @@ async function getSiteMetadata(apolloClient, process, verbose = false) {
       id
       generalSettings: self {
         id
-        description: option(name: "blogdescription")
-        language: option(name: "WPLANG")
-        title: option(name: "blogname")
+        description: optionValue(name: "blogdescription")
+        language: optionValue(name: "WPLANG")
+        title: optionValue(name: "blogname")
       }
     }
   `;
