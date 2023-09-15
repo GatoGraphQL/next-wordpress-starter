@@ -239,7 +239,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG_INDEX = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
+      edges: posts(filter: { hasPassword: false, author: { slug: $slug } }, pagination: { limit: -1 }) {
         node: self {
           ...PostFields
         }
@@ -254,7 +254,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
+      edges: posts(filter: { hasPassword: false, author: { slug: $slug } }, pagination: { limit: -1 }) {
         node: self {
           ...PostFields
           excerpt
@@ -270,7 +270,7 @@ export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { hasPassword: false, authorSlug: $slug }, pagination: { limit: -1 }) {
+      edges: posts(filter: { hasPassword: false, author: { slug: $slug } }, pagination: { limit: -1 }) {
         node: self {
           ...PostFields
           excerpt
