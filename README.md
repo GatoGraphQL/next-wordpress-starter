@@ -39,6 +39,11 @@ Change it as follows:
 WORDPRESS_GRAPHQL_ENDPOINT="http://yourhost.com/index.php?graphql
 ```
 
+The starter by default uses **WPGraphQL**. To use **Gato GraphQL**, add this variable to `.env.local`:
+```
+WORDPRESS_GRAPHQL_PROVIDER="gatographql"
+```
+
 ## 🚀 Getting Started
 
 ### What is this and what does it include?
