@@ -197,7 +197,7 @@ By enabling the Image Accelerator from Jetpack, your images will automatically b
 
 ### Yoast SEO
 
-The Yoast SEO plugin is partially supported including most major features like metadata and open graph customization.
+The Yoast SEO plugin is partially supported including most major features like metadata and open graph customization. For WPGraphQL only.
 
 #### Requirements
 * Yoast SEO plugin
