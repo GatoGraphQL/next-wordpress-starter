@@ -1,4 +1,10 @@
-import { WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL } from 'providers/providers';
+import { WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL, WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL } from 'providers/providers';
+
+import {
+  QUERY_ALL_POSTS as WPGRAPHQL_QUERY_ALL_POSTS,
+  QUERY_SITE_METADATA as WPGRAPHQL_QUERY_SITE_METADATA,
+  QUERY_ALL_PAGES as WPGRAPHQL_QUERY_ALL_PAGES,
+} from 'providers/wpgraphql/data/util';
 
 import {
   QUERY_ALL_POSTS as GATOGRAPHQL_QUERY_ALL_POSTS,
@@ -12,6 +18,13 @@ module.exports = function feed(nextConfig = {}) {
   const { WORDPRESS_GRAPHQL_PROVIDER } = env;
 
   return Object.assign({}, nextConfig, {
+    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
+      ? {
+          WPGRAPHQL_QUERY_ALL_POSTS,
+          WPGRAPHQL_QUERY_SITE_METADATA,
+          WPGRAPHQL_QUERY_ALL_PAGES,
+        }
+      : {}),
     ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
       ? {
           GATOGRAPHQL_QUERY_ALL_POSTS,
