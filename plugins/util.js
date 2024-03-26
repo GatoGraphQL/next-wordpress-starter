@@ -1,10 +1,12 @@
 const fs = require('fs');
 const he = require('he');
-const { gql, ApolloClient, InMemoryCache } = require('@apollo/client');
+const { ApolloClient, InMemoryCache } = require('@apollo/client');
 const RSS = require('rss');
 const prettier = require('prettier');
 
 const config = require('../package.json');
+
+import { QUERY_ALL_POSTS, QUERY_SITE_METADATA, QUERY_ALL_PAGES } from 'data/util';
 
 /**
  * createFile
@@ -70,36 +72,7 @@ function createApolloClient(url) {
  */
 
 async function getAllPosts(apolloClient, process, verbose = false) {
-  const query = gql`
-    {
-      id
-      posts: self {
-        id
-        edges: posts(pagination: { limit: -1 }) {
-          node: self {
-            title
-            excerpt
-            databaseId: id
-            slug
-            date: dateStr
-            modified: modifiedDateStr
-            author {
-              node: self {
-                name
-              }
-            }
-            categories: self {
-              edges: categories(pagination: { limit: -1 }) {
-                node: self {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
+  const query = QUERY_ALL_POSTS;
 
   let posts = [];
 
@@ -141,17 +114,7 @@ async function getAllPosts(apolloClient, process, verbose = false) {
  */
 
 async function getSiteMetadata(apolloClient, process, verbose = false) {
-  const query = gql`
-    {
-      id
-      generalSettings: self {
-        id
-        description: optionValue(name: "blogdescription")
-        language: optionValue(name: "WPLANG")
-        title: optionValue(name: "blogname")
-      }
-    }
-  `;
+  const query = QUERY_SITE_METADATA;
 
   let metadata = {};
 
@@ -179,20 +142,7 @@ async function getSiteMetadata(apolloClient, process, verbose = false) {
  */
 
 async function getPages(apolloClient, process, verbose = false) {
-  const query = gql`
-    {
-      id
-      pages: self {
-        id
-        edges: pages(pagination: { limit: -1 }) {
-          node: self {
-            slug
-            modified: modifiedDateStr
-          }
-        }
-      }
-    }
-  `;
+  const query = QUERY_ALL_PAGES;
 
   let pages = [];
 
