@@ -1,6 +1,10 @@
 import { getApolloClient } from 'lib/apollo-client';
 
-import { QUERY_ALL_CATEGORIES, QUERY_CATEGORY_BY_SLUG, QUERY_CATEGORY_SEO_BY_SLUG } from 'data/categories';
+import {
+  QUERY_ALL_CATEGORIES,
+  QUERY_CATEGORY_BY_SLUG,
+  QUERY_CATEGORY_SEO_BY_SLUG,
+} from 'providers/gatographql/data/categories';
 
 /**
  * categoryPathBySlug

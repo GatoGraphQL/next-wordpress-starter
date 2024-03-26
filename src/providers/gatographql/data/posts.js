@@ -156,7 +156,10 @@ export const QUERY_POSTS_BY_CATEGORY_ID_INDEX = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { hasPassword: false, categories: { includeBy: { ids: [$categoryId] } } }, pagination: { limit: -1 }) {
+      edges: posts(
+        filter: { hasPassword: false, categories: { includeBy: { ids: [$categoryId] } } }
+        pagination: { limit: -1 }
+      ) {
         node: self {
           ...PostFields
         }
@@ -171,7 +174,10 @@ export const QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { hasPassword: false, categories: { includeBy: { ids: [$categoryId] } } }, pagination: { limit: -1 }) {
+      edges: posts(
+        filter: { hasPassword: false, categories: { includeBy: { ids: [$categoryId] } } }
+        pagination: { limit: -1 }
+      ) {
         node: self {
           ...PostFields
           author {
@@ -199,7 +205,10 @@ export const QUERY_POSTS_BY_CATEGORY_ID = gql`
     id
     posts: self {
       id
-      edges: posts(filter: { hasPassword: false, categories: { includeBy: { ids: [$categoryId] } } }, pagination: { limit: -1 }) {
+      edges: posts(
+        filter: { hasPassword: false, categories: { includeBy: { ids: [$categoryId] } } }
+        pagination: { limit: -1 }
+      ) {
         node: self {
           ...PostFields
           author {

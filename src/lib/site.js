@@ -2,7 +2,7 @@ import { getApolloClient } from 'lib/apollo-client';
 
 import { decodeHtmlEntities, removeExtraSpaces } from 'lib/util';
 
-import { QUERY_SITE_DATA, QUERY_SEO_DATA } from 'data/site';
+import { QUERY_SITE_DATA, QUERY_SEO_DATA } from 'providers/gatographql/data/site';
 
 /**
  * getSiteMetadata

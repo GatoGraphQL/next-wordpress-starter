@@ -16,7 +16,7 @@ import {
   QUERY_POSTS_BY_CATEGORY_ID,
   QUERY_POST_SEO_BY_SLUG,
   QUERY_POST_PER_PAGE,
-} from 'data/posts';
+} from 'providers/gatographql/data/posts';
 
 /**
  * postPathBySlug
