@@ -47,3 +47,4 @@ jobs:
       - run: pnpm build && pnpm export
         env:
           WORDPRESS_GRAPHQL_ENDPOINT: ${{ secrets.WORDPRESS_GRAPHQL_ENDPOINT }}
+          WORDPRESS_GRAPHQL_PROVIDER: ${{ secrets.WORDPRESS_GRAPHQL_PROVIDER }}

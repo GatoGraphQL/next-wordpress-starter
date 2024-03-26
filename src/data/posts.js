@@ -1,326 +1,70 @@
-import { gql } from '@apollo/client';
+import {
+  POST_FIELDS as WPGRAPHQL_POST_FIELDS,
+  QUERY_ALL_POSTS_INDEX as WPGRAPHQL_QUERY_ALL_POSTS_INDEX,
+  QUERY_ALL_POSTS_ARCHIVE as WPGRAPHQL_QUERY_ALL_POSTS_ARCHIVE,
+  QUERY_ALL_POSTS as WPGRAPHQL_QUERY_ALL_POSTS,
+  QUERY_POST_BY_SLUG as WPGRAPHQL_QUERY_POST_BY_SLUG,
+  QUERY_POSTS_BY_CATEGORY_ID_INDEX as WPGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_INDEX,
+  QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE as WPGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE,
+  QUERY_POSTS_BY_CATEGORY_ID as WPGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID,
+  QUERY_POSTS_BY_AUTHOR_SLUG_INDEX as WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_INDEX,
+  QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE as WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE,
+  QUERY_POSTS_BY_AUTHOR_SLUG as WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG,
+  QUERY_POST_SEO_BY_SLUG as WPGRAPHQL_QUERY_POST_SEO_BY_SLUG,
+  QUERY_POST_PER_PAGE as WPGRAPHQL_QUERY_POST_PER_PAGE,
+} from './providers/wpgraphql/posts';
 
-export const POST_FIELDS = gql`
-  fragment PostFields on Post {
-    id
-    categories {
-      edges {
-        node {
-          databaseId
-          id
-          name
-          slug
-        }
-      }
-    }
-    databaseId
-    date
-    isSticky
-    postId
-    slug
-    title
-  }
-`;
+import {
+  POST_FIELDS as GATOGRAPHQL_POST_FIELDS,
+  QUERY_ALL_POSTS_INDEX as GATOGRAPHQL_QUERY_ALL_POSTS_INDEX,
+  QUERY_ALL_POSTS_ARCHIVE as GATOGRAPHQL_QUERY_ALL_POSTS_ARCHIVE,
+  QUERY_ALL_POSTS as GATOGRAPHQL_QUERY_ALL_POSTS,
+  QUERY_POST_BY_SLUG as GATOGRAPHQL_QUERY_POST_BY_SLUG,
+  QUERY_POSTS_BY_CATEGORY_ID_INDEX as GATOGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_INDEX,
+  QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE as GATOGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE,
+  QUERY_POSTS_BY_CATEGORY_ID as GATOGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID,
+  QUERY_POSTS_BY_AUTHOR_SLUG_INDEX as GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_INDEX,
+  QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE as GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE,
+  QUERY_POSTS_BY_AUTHOR_SLUG as GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG,
+  QUERY_POST_SEO_BY_SLUG as GATOGRAPHQL_QUERY_POST_SEO_BY_SLUG,
+  QUERY_POST_PER_PAGE as GATOGRAPHQL_QUERY_POST_PER_PAGE,
+} from './providers/gatographql/posts';
 
-export const QUERY_ALL_POSTS_INDEX = gql`
-  ${POST_FIELDS}
-  query AllPostsIndex {
-    posts(first: 10000, where: { hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-        }
-      }
-    }
-  }
-`;
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
 
-export const QUERY_ALL_POSTS_ARCHIVE = gql`
-  ${POST_FIELDS}
-  query AllPostsArchive {
-    posts(first: 10000, where: { hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-          author {
-            node {
-              avatar {
-                height
-                url
-                width
-              }
-              id
-              name
-              slug
-            }
-          }
-          excerpt
-        }
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
+    ? {
+        POST_FIELDS: WPGRAPHQL_POST_FIELDS,
+        QUERY_ALL_POSTS_INDEX: WPGRAPHQL_QUERY_ALL_POSTS_INDEX,
+        QUERY_ALL_POSTS_ARCHIVE: WPGRAPHQL_QUERY_ALL_POSTS_ARCHIVE,
+        QUERY_ALL_POSTS: WPGRAPHQL_QUERY_ALL_POSTS,
+        QUERY_POST_BY_SLUG: WPGRAPHQL_QUERY_POST_BY_SLUG,
+        QUERY_POSTS_BY_CATEGORY_ID_INDEX: WPGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_INDEX,
+        QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE: WPGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE,
+        QUERY_POSTS_BY_CATEGORY_ID: WPGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID,
+        QUERY_POSTS_BY_AUTHOR_SLUG_INDEX: WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_INDEX,
+        QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE: WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE,
+        QUERY_POSTS_BY_AUTHOR_SLUG: WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG,
+        QUERY_POST_SEO_BY_SLUG: WPGRAPHQL_QUERY_POST_SEO_BY_SLUG,
+        QUERY_POST_PER_PAGE: WPGRAPHQL_QUERY_POST_PER_PAGE,
       }
-    }
-  }
-`;
-
-export const QUERY_ALL_POSTS = gql`
-  ${POST_FIELDS}
-  query AllPosts {
-    posts(first: 10000, where: { hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-          author {
-            node {
-              avatar {
-                height
-                url
-                width
-              }
-              id
-              name
-              slug
-            }
-          }
-          content
-          excerpt
-          featuredImage {
-            node {
-              altText
-              caption
-              sourceUrl
-              srcSet
-              sizes
-              id
-            }
-          }
-          modified
-        }
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'gatographql'
+    ? {
+        POST_FIELDS: GATOGRAPHQL_POST_FIELDS,
+        QUERY_ALL_POSTS_INDEX: GATOGRAPHQL_QUERY_ALL_POSTS_INDEX,
+        QUERY_ALL_POSTS_ARCHIVE: GATOGRAPHQL_QUERY_ALL_POSTS_ARCHIVE,
+        QUERY_ALL_POSTS: GATOGRAPHQL_QUERY_ALL_POSTS,
+        QUERY_POST_BY_SLUG: GATOGRAPHQL_QUERY_POST_BY_SLUG,
+        QUERY_POSTS_BY_CATEGORY_ID_INDEX: GATOGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_INDEX,
+        QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE: GATOGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE,
+        QUERY_POSTS_BY_CATEGORY_ID: GATOGRAPHQL_QUERY_POSTS_BY_CATEGORY_ID,
+        QUERY_POSTS_BY_AUTHOR_SLUG_INDEX: GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_INDEX,
+        QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE: GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE,
+        QUERY_POSTS_BY_AUTHOR_SLUG: GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG,
+        QUERY_POST_SEO_BY_SLUG: GATOGRAPHQL_QUERY_POST_SEO_BY_SLUG,
+        QUERY_POST_PER_PAGE: GATOGRAPHQL_QUERY_POST_PER_PAGE,
       }
-    }
-  }
-`;
-
-export const QUERY_POST_BY_SLUG = gql`
-  query PostBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
-      author {
-        node {
-          avatar {
-            height
-            url
-            width
-          }
-          id
-          name
-          slug
-        }
-      }
-      id
-      categories {
-        edges {
-          node {
-            databaseId
-            id
-            name
-            slug
-          }
-        }
-      }
-      content
-      date
-      excerpt
-      featuredImage {
-        node {
-          altText
-          caption
-          sourceUrl
-          srcSet
-          sizes
-          id
-        }
-      }
-      modified
-      databaseId
-      title
-      slug
-      isSticky
-    }
-  }
-`;
-
-export const QUERY_POSTS_BY_CATEGORY_ID_INDEX = gql`
-  ${POST_FIELDS}
-  query PostsByCategoryId($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId, hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE = gql`
-  ${POST_FIELDS}
-  query PostsByCategoryId($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId, hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-          author {
-            node {
-              avatar {
-                height
-                url
-                width
-              }
-              id
-              name
-              slug
-            }
-          }
-          excerpt
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POSTS_BY_CATEGORY_ID = gql`
-  ${POST_FIELDS}
-  query PostsByCategoryId($categoryId: Int!) {
-    posts(where: { categoryId: $categoryId, hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-          author {
-            node {
-              avatar {
-                height
-                url
-                width
-              }
-              id
-              name
-              slug
-            }
-          }
-          content
-          excerpt
-          featuredImage {
-            node {
-              altText
-              caption
-              id
-              sizes
-              sourceUrl
-              srcSet
-            }
-          }
-          modified
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POSTS_BY_AUTHOR_SLUG_INDEX = gql`
-  ${POST_FIELDS}
-  query PostByAuthorSlugIndex($slug: String!) {
-    posts(where: { authorName: $slug, hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POSTS_BY_AUTHOR_SLUG_ARCHIVE = gql`
-  ${POST_FIELDS}
-  query PostByAuthorSlugArchive($slug: String!) {
-    posts(where: { authorName: $slug, hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-          excerpt
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POSTS_BY_AUTHOR_SLUG = gql`
-  ${POST_FIELDS}
-  query PostByAuthorSlug($slug: String!) {
-    posts(where: { authorName: $slug, hasPassword: false }) {
-      edges {
-        node {
-          ...PostFields
-          excerpt
-          featuredImage {
-            node {
-              altText
-              caption
-              id
-              sizes
-              sourceUrl
-              srcSet
-            }
-          }
-          modified
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POST_SEO_BY_SLUG = gql`
-  query PostSEOBySlug($slug: ID!) {
-    post(id: $slug, idType: SLUG) {
-      id
-      seo {
-        canonical
-        metaDesc
-        metaRobotsNofollow
-        metaRobotsNoindex
-        opengraphAuthor
-        opengraphDescription
-        opengraphModifiedTime
-        opengraphPublishedTime
-        opengraphPublisher
-        opengraphTitle
-        opengraphType
-        readingTime
-        title
-        twitterDescription
-        twitterTitle
-        twitterImage {
-          altText
-          sourceUrl
-          mediaDetails {
-            width
-            height
-          }
-        }
-        opengraphImage {
-          altText
-          sourceUrl
-          mediaDetails {
-            height
-            width
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_POST_PER_PAGE = gql`
-  query PostPerPage {
-    allSettings {
-      readingSettingsPostsPerPage
-    }
-  }
-`;
+    : {}),
+};

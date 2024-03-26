@@ -1,171 +1,41 @@
-import { gql } from '@apollo/client';
+import {
+  PAGE_FIELDS as WPGRAPHQL_PAGE_FIELDS,
+  QUERY_ALL_PAGES_INDEX as WPGRAPHQL_QUERY_ALL_PAGES_INDEX,
+  QUERY_ALL_PAGES_ARCHIVE as WPGRAPHQL_QUERY_ALL_PAGES_ARCHIVE,
+  QUERY_ALL_PAGES as WPGRAPHQL_QUERY_ALL_PAGES,
+  QUERY_PAGE_BY_URI as WPGRAPHQL_QUERY_PAGE_BY_URI,
+  QUERY_PAGE_SEO_BY_URI as WPGRAPHQL_QUERY_PAGE_SEO_BY_URI,
+} from './providers/wpgraphql/pages';
 
-export const PAGE_FIELDS = gql`
-  fragment PageFields on Page {
-    children {
-      edges {
-        node {
-          id
-          slug
-          uri
-          ... on Page {
-            id
-            title
-          }
-        }
-      }
-    }
-    id
-    menuOrder
-    parent {
-      node {
-        id
-        slug
-        uri
-        ... on Page {
-          title
-        }
-      }
-    }
-    slug
-    title
-    uri
-  }
-`;
+import {
+  PAGE_FIELDS as GATOGRAPHQL_PAGE_FIELDS,
+  QUERY_ALL_PAGES_INDEX as GATOGRAPHQL_QUERY_ALL_PAGES_INDEX,
+  QUERY_ALL_PAGES_ARCHIVE as GATOGRAPHQL_QUERY_ALL_PAGES_ARCHIVE,
+  QUERY_ALL_PAGES as GATOGRAPHQL_QUERY_ALL_PAGES,
+  QUERY_PAGE_BY_URI as GATOGRAPHQL_QUERY_PAGE_BY_URI,
+  QUERY_PAGE_SEO_BY_URI as GATOGRAPHQL_QUERY_PAGE_SEO_BY_URI,
+} from './providers/gatographql/pages';
 
-export const QUERY_ALL_PAGES_INDEX = gql`
-  ${PAGE_FIELDS}
-  query AllPagesIndex {
-    pages(first: 10000, where: { hasPassword: false }) {
-      edges {
-        node {
-          ...PageFields
-        }
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
+    ? {
+        PAGE_FIELDS: WPGRAPHQL_PAGE_FIELDS,
+        QUERY_ALL_PAGES_INDEX: WPGRAPHQL_QUERY_ALL_PAGES_INDEX,
+        QUERY_ALL_PAGES_ARCHIVE: WPGRAPHQL_QUERY_ALL_PAGES_ARCHIVE,
+        QUERY_ALL_PAGES: WPGRAPHQL_QUERY_ALL_PAGES,
+        QUERY_PAGE_BY_URI: WPGRAPHQL_QUERY_PAGE_BY_URI,
+        QUERY_PAGE_SEO_BY_URI: WPGRAPHQL_QUERY_PAGE_SEO_BY_URI,
       }
-    }
-  }
-`;
-
-export const QUERY_ALL_PAGES_ARCHIVE = gql`
-  ${PAGE_FIELDS}
-  query AllPagesIndex {
-    pages(first: 10000, where: { hasPassword: false }) {
-      edges {
-        node {
-          ...PageFields
-        }
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'gatographql'
+    ? {
+        PAGE_FIELDS: GATOGRAPHQL_PAGE_FIELDS,
+        QUERY_ALL_PAGES_INDEX: GATOGRAPHQL_QUERY_ALL_PAGES_INDEX,
+        QUERY_ALL_PAGES_ARCHIVE: GATOGRAPHQL_QUERY_ALL_PAGES_ARCHIVE,
+        QUERY_ALL_PAGES: GATOGRAPHQL_QUERY_ALL_PAGES,
+        QUERY_PAGE_BY_URI: GATOGRAPHQL_QUERY_PAGE_BY_URI,
+        QUERY_PAGE_SEO_BY_URI: GATOGRAPHQL_QUERY_PAGE_SEO_BY_URI,
       }
-    }
-  }
-`;
-
-export const QUERY_ALL_PAGES = gql`
-  ${PAGE_FIELDS}
-  query AllPagesIndex {
-    pages(first: 10000, where: { hasPassword: false }) {
-      edges {
-        node {
-          ...PageFields
-          content
-          featuredImage {
-            node {
-              altText
-              caption
-              id
-              sizes
-              sourceUrl
-              srcSet
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export const QUERY_PAGE_BY_URI = gql`
-  query PageByUri($uri: ID!) {
-    page(id: $uri, idType: URI) {
-      children {
-        edges {
-          node {
-            id
-            slug
-            uri
-            ... on Page {
-              id
-              title
-            }
-          }
-        }
-      }
-      content
-      featuredImage {
-        node {
-          altText
-          caption
-          id
-          sizes
-          sourceUrl
-          srcSet
-        }
-      }
-      id
-      menuOrder
-      parent {
-        node {
-          id
-          slug
-          uri
-          ... on Page {
-            title
-          }
-        }
-      }
-      slug
-      title
-      uri
-    }
-  }
-`;
-
-export const QUERY_PAGE_SEO_BY_URI = gql`
-  query PageSEOByUri($uri: ID!) {
-    page(id: $uri, idType: URI) {
-      id
-      seo {
-        canonical
-        metaDesc
-        metaRobotsNofollow
-        metaRobotsNoindex
-        opengraphAuthor
-        opengraphDescription
-        opengraphModifiedTime
-        opengraphPublishedTime
-        opengraphPublisher
-        opengraphTitle
-        opengraphType
-        readingTime
-        title
-        twitterDescription
-        twitterTitle
-        twitterImage {
-          altText
-          sourceUrl
-          mediaDetails {
-            width
-            height
-          }
-        }
-        opengraphImage {
-          altText
-          sourceUrl
-          mediaDetails {
-            height
-            width
-          }
-        }
-      }
-    }
-  }
-`;
+    : {}),
+};

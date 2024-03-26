@@ -1,55 +1,25 @@
-import { gql } from '@apollo/client';
+import {
+  QUERY_ALL_USERS as WPGRAPHQL_QUERY_ALL_USERS,
+  QUERY_ALL_USERS_SEO as WPGRAPHQL_QUERY_ALL_USERS_SEO,
+} from './providers/wpgraphql/users';
 
-export const QUERY_ALL_USERS = gql`
-  query AllUsers {
-    users(first: 10000) {
-      edges {
-        node {
-          avatar {
-            height
-            width
-            url
-          }
-          description
-          id
-          name
-          roles {
-            nodes {
-              name
-            }
-          }
-          slug
-        }
-      }
-    }
-  }
-`;
+import {
+  QUERY_ALL_USERS as GATOGRAPHQL_QUERY_ALL_USERS,
+  QUERY_ALL_USERS_SEO as GATOGRAPHQL_QUERY_ALL_USERS_SEO,
+} from './providers/gatographql/users';
 
-export const QUERY_ALL_USERS_SEO = gql`
-  query AllUsersSeo {
-    users(first: 10000) {
-      edges {
-        node {
-          id
-          seo {
-            metaDesc
-            metaRobotsNofollow
-            metaRobotsNoindex
-            title
-            social {
-              youTube
-              wikipedia
-              twitter
-              soundCloud
-              pinterest
-              mySpace
-              linkedIn
-              instagram
-              facebook
-            }
-          }
-        }
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
+    ? {
+        QUERY_ALL_USERS: WPGRAPHQL_QUERY_ALL_USERS,
+        QUERY_ALL_USERS_SEO: WPGRAPHQL_QUERY_ALL_USERS_SEO,
       }
-    }
-  }
-`;
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'gatographql'
+    ? {
+        QUERY_ALL_USERS: GATOGRAPHQL_QUERY_ALL_USERS,
+        QUERY_ALL_USERS_SEO: GATOGRAPHQL_QUERY_ALL_USERS_SEO,
+      }
+    : {}),
+};

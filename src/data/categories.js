@@ -1,69 +1,29 @@
-import { gql } from '@apollo/client';
+import {
+  QUERY_ALL_CATEGORIES as WPGRAPHQL_QUERY_ALL_CATEGORIES,
+  QUERY_CATEGORY_BY_SLUG as WPGRAPHQL_QUERY_CATEGORY_BY_SLUG,
+  QUERY_CATEGORY_SEO_BY_SLUG as WPGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
+} from './providers/wpgraphql/categories';
 
-export const QUERY_ALL_CATEGORIES = gql`
-  query AllCategories {
-    categories(first: 10000) {
-      edges {
-        node {
-          databaseId
-          description
-          id
-          name
-          slug
-        }
+import {
+  QUERY_ALL_CATEGORIES as GATOGRAPHQL_QUERY_ALL_CATEGORIES,
+  QUERY_CATEGORY_BY_SLUG as GATOGRAPHQL_QUERY_CATEGORY_BY_SLUG,
+  QUERY_CATEGORY_SEO_BY_SLUG as GATOGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
+} from './providers/gatographql/categories';
+
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
+    ? {
+        QUERY_ALL_CATEGORIES: WPGRAPHQL_QUERY_ALL_CATEGORIES,
+        QUERY_CATEGORY_BY_SLUG: WPGRAPHQL_QUERY_CATEGORY_BY_SLUG,
+        QUERY_CATEGORY_SEO_BY_SLUG: WPGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
       }
-    }
-  }
-`;
-
-export const QUERY_CATEGORY_BY_SLUG = gql`
-  query CategoryBySlug($slug: ID!) {
-    category(id: $slug, idType: SLUG) {
-      databaseId
-      description
-      id
-      name
-      slug
-    }
-  }
-`;
-
-export const QUERY_CATEGORY_SEO_BY_SLUG = gql`
-  query CategorySEOBySlug($slug: ID!) {
-    category(id: $slug, idType: SLUG) {
-      id
-      seo {
-        canonical
-        metaDesc
-        metaRobotsNofollow
-        metaRobotsNoindex
-        opengraphAuthor
-        opengraphDescription
-        opengraphModifiedTime
-        opengraphPublishedTime
-        opengraphPublisher
-        opengraphTitle
-        opengraphType
-        title
-        twitterDescription
-        twitterTitle
-        twitterImage {
-          altText
-          sourceUrl
-          mediaDetails {
-            width
-            height
-          }
-        }
-        opengraphImage {
-          altText
-          sourceUrl
-          mediaDetails {
-            height
-            width
-          }
-        }
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === 'gatographql'
+    ? {
+        QUERY_ALL_CATEGORIES: GATOGRAPHQL_QUERY_ALL_CATEGORIES,
+        QUERY_CATEGORY_BY_SLUG: GATOGRAPHQL_QUERY_CATEGORY_BY_SLUG,
+        QUERY_CATEGORY_SEO_BY_SLUG: GATOGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
       }
-    }
-  }
-`;
+    : {}),
+};

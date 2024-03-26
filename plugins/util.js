@@ -1,10 +1,18 @@
 const fs = require('fs');
 const he = require('he');
-const { gql, ApolloClient, InMemoryCache } = require('@apollo/client');
+const { ApolloClient, InMemoryCache } = require('@apollo/client');
 const RSS = require('rss');
 const prettier = require('prettier');
 
 const config = require('../package.json');
+
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('../src/lib/provider');
+
+const {
+  QUERY_ALL_POSTS,
+  QUERY_SITE_METADATA,
+  QUERY_ALL_PAGES,
+} = require(`./providers/${WORDPRESS_GRAPHQL_PROVIDER}/util`);
 
 /**
  * createFile
@@ -70,34 +78,7 @@ function createApolloClient(url) {
  */
 
 async function getAllPosts(apolloClient, process, verbose = false) {
-  const query = gql`
-    {
-      posts(first: 10000) {
-        edges {
-          node {
-            title
-            excerpt
-            databaseId
-            slug
-            date
-            modified
-            author {
-              node {
-                name
-              }
-            }
-            categories {
-              edges {
-                node {
-                  name
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
+  const query = QUERY_ALL_POSTS;
 
   let posts = [];
 
@@ -139,15 +120,7 @@ async function getAllPosts(apolloClient, process, verbose = false) {
  */
 
 async function getSiteMetadata(apolloClient, process, verbose = false) {
-  const query = gql`
-    {
-      generalSettings {
-        description
-        language
-        title
-      }
-    }
-  `;
+  const query = QUERY_SITE_METADATA;
 
   let metadata = {};
 
@@ -175,18 +148,7 @@ async function getSiteMetadata(apolloClient, process, verbose = false) {
  */
 
 async function getPages(apolloClient, process, verbose = false) {
-  const query = gql`
-    {
-      pages(first: 10000) {
-        edges {
-          node {
-            slug
-            modified
-          }
-        }
-      }
-    }
-  `;
+  const query = QUERY_ALL_PAGES;
 
   let pages = [];
 
