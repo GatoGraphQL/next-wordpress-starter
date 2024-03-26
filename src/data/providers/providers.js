@@ -1,2 +1,0 @@
-export const WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL = 'wpgraphql';
-export const WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL = 'gatographql';
