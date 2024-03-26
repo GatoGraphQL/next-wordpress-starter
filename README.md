@@ -76,27 +76,34 @@ Check out the [Issues](https://github.com/colbyfayock/next-wordpress-starter/iss
 * [WPGraphQL](https://www.wpgraphql.com/) or [Gato GraphQL](https://gatographql.com)
 * Environment variables (see below)
 
+### Providers
+
+This project makes use of **WPGraphQL** or **Gato GraphQL** to query WordPress with GraphQL. Which provider to use is your choice. By default, **WPGraphQL** is used.
+
 ### Environment
 
-This project makes use of WPGraphQL to query WordPress with GraphQL. In order to make that request to the appropriate endpoint, we need to set a environment variable to let Next.js know where to request the site information from.
+In order to make that request to the appropriate endpoint, we need to set a environment variable to let Next.js know where to request the site information from.
 
 Create a new file locally called `.env.local` and add the following:
 
 ```bash
-WORDPRESS_GRAPHQL_ENDPOINT="[WPGraphQL Endpoint]"
+WORDPRESS_GRAPHQL_ENDPOINT="[GraphQL Endpoint]"
 ```
 
-Replace the contents of the variable with your WPGraphQL endpoint. By default, it should resemble `[Your Host]/graphql`.
+Replace the contents of the variable with your GraphQL endpoint. By default, it should resemble `[Your Host]/graphql`.
 
 *Note: environment variables can optionally be statically configured in next.config.js*
 
+*Note 2: In Gato GraphQL, the public single endpoint [must be explicitly enabled](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint)*
+
 #### All Environment Variables
 
-| Name                               | Required | Default | Description                                       |
-| ---------------------------------- | -------- | -       | ------------------------------------------------- |
-| WORDPRESS_GRAPHQL_ENDPOINT         | Yes      | -       | WordPress WPGraphQL endpoint (ex: host.com/graphl)|
-| WORDPRESS_MENU_LOCATION_NAVIGATION | No       | PRIMARY | Configures header navigation Menu Location        |
-| WORDPRESS_PLUGIN_SEO               | No       | false   | Enables SEO plugin support (true, false)          |
+| Name                               | Required | Default   | Description                                       |
+| ---------------------------------- | -------- | -         | ------------------------------------------------- |
+| WORDPRESS_GRAPHQL_ENDPOINT         | Yes      | -         | WordPress GraphQL endpoint (ex: host.com/graphql) |
+| WORDPRESS_GRAPHQL_PROVIDER         | No       | wpgraphql | GraphQL provider: 'wpgraphql' or 'gatographql'    |
+| WORDPRESS_MENU_LOCATION_NAVIGATION | No       | PRIMARY   | Configures header navigation Menu Location        |
+| WORDPRESS_PLUGIN_SEO               | No       | false     | Enables SEO plugin support (true, false)          |
 
 Please note some themes do not have PRIMARY menu location.
 
