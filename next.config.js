@@ -3,8 +3,6 @@ const feed = require('./plugins/feed');
 const sitemap = require('./plugins/sitemap');
 // const socialImages = require('./plugins/socialImages'); TODO: failing to run on Netlify
 
-import { WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL, WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL } from 'providers/providers';
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -31,11 +29,7 @@ const nextConfig = {
     // the rest will be rendered on-demand
     POSTS_PRERENDER_COUNT: 5,
 
-    WORDPRESS_GRAPHQL_PROVIDER: parseEnvConstValue(
-      (process.env.WORDPRESS_GRAPHQL_PROVIDER || '').toLowerCase(),
-      [WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL, WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL],
-      WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
-    ),
+    WORDPRESS_GRAPHQL_PROVIDER: process.env.WORDPRESS_GRAPHQL_PROVIDER,
     WORDPRESS_GRAPHQL_ENDPOINT: process.env.WORDPRESS_GRAPHQL_ENDPOINT,
     WORDPRESS_MENU_LOCATION_NAVIGATION: process.env.WORDPRESS_MENU_LOCATION_NAVIGATION || 'PRIMARY',
     WORDPRESS_PLUGIN_SEO: parseEnvValue(process.env.WORDPRESS_PLUGIN_SEO, false),
@@ -56,15 +50,5 @@ function parseEnvValue(value, defaultValue) {
   if (typeof value === 'undefined') return defaultValue;
   if (value === true || value === 'true') return true;
   if (value === false || value === 'false') return false;
-  return value;
-}
-
-/**
- * parseEnvConst
- * @description Helper function to make sure the provider exists, or provide the default one
- */
-
-function parseEnvConstValue(value, options, defaultValue) {
-  if (!value || !options.includes(value)) return defaultValue;
   return value;
 }
