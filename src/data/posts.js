@@ -14,7 +14,7 @@ import {
   QUERY_POSTS_BY_AUTHOR_SLUG as WPGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG,
   QUERY_POST_SEO_BY_SLUG as WPGRAPHQL_QUERY_POST_SEO_BY_SLUG,
   QUERY_POST_PER_PAGE as WPGRAPHQL_QUERY_POST_PER_PAGE,
-} from 'providers/wpgraphql/data/posts';
+} from './wpgraphql/posts';
 
 import {
   POST_FIELDS as GATOGRAPHQL_POST_FIELDS,
@@ -30,7 +30,7 @@ import {
   QUERY_POSTS_BY_AUTHOR_SLUG as GATOGRAPHQL_QUERY_POSTS_BY_AUTHOR_SLUG,
   QUERY_POST_SEO_BY_SLUG as GATOGRAPHQL_QUERY_POST_SEO_BY_SLUG,
   QUERY_POST_PER_PAGE as GATOGRAPHQL_QUERY_POST_PER_PAGE,
-} from 'providers/gatographql/data/posts';
+} from './gatographql/posts';
 
 module.exports = function feed(nextConfig = {}) {
   const { env } = nextConfig;

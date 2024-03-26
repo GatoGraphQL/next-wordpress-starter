@@ -4,13 +4,13 @@ import {
   QUERY_ALL_CATEGORIES as WPGRAPHQL_QUERY_ALL_CATEGORIES,
   QUERY_CATEGORY_BY_SLUG as WPGRAPHQL_QUERY_CATEGORY_BY_SLUG,
   QUERY_CATEGORY_SEO_BY_SLUG as WPGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
-} from 'providers/wpgraphql/data/categories';
+} from './wpgraphql/categories';
 
 import {
   QUERY_ALL_CATEGORIES as GATOGRAPHQL_QUERY_ALL_CATEGORIES,
   QUERY_CATEGORY_BY_SLUG as GATOGRAPHQL_QUERY_CATEGORY_BY_SLUG,
   QUERY_CATEGORY_SEO_BY_SLUG as GATOGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
-} from 'providers/gatographql/data/categories';
+} from './gatographql/categories';
 
 module.exports = function feed(nextConfig = {}) {
   const { env } = nextConfig;

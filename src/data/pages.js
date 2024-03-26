@@ -7,7 +7,7 @@ import {
   QUERY_ALL_PAGES as WPGRAPHQL_QUERY_ALL_PAGES,
   QUERY_PAGE_BY_URI as WPGRAPHQL_QUERY_PAGE_BY_URI,
   QUERY_PAGE_SEO_BY_URI as WPGRAPHQL_QUERY_PAGE_SEO_BY_URI,
-} from 'providers/wpgraphql/data/pages';
+} from './wpgraphql/pages';
 
 import {
   PAGE_FIELDS as GATOGRAPHQL_PAGE_FIELDS,
@@ -16,7 +16,7 @@ import {
   QUERY_ALL_PAGES as GATOGRAPHQL_QUERY_ALL_PAGES,
   QUERY_PAGE_BY_URI as GATOGRAPHQL_QUERY_PAGE_BY_URI,
   QUERY_PAGE_SEO_BY_URI as GATOGRAPHQL_QUERY_PAGE_SEO_BY_URI,
-} from 'providers/gatographql/data/pages';
+} from './gatographql/pages';
 
 module.exports = function feed(nextConfig = {}) {
   const { env } = nextConfig;

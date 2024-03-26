@@ -3,12 +3,12 @@ import { WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL, WORDPRESS_GRAPHQL_PROVIDER_GATOGR
 import {
   QUERY_ALL_USERS as WPGRAPHQL_QUERY_ALL_USERS,
   QUERY_ALL_USERS_SEO as WPGRAPHQL_QUERY_ALL_USERS_SEO,
-} from 'providers/wpgraphql/data/users';
+} from './wpgraphql/users';
 
 import {
   QUERY_ALL_USERS as GATOGRAPHQL_QUERY_ALL_USERS,
   QUERY_ALL_USERS_SEO as GATOGRAPHQL_QUERY_ALL_USERS_SEO,
-} from 'providers/gatographql/data/users';
+} from './gatographql/users';
 
 module.exports = function feed(nextConfig = {}) {
   const { env } = nextConfig;
