@@ -3,12 +3,12 @@ import { WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL, WORDPRESS_GRAPHQL_PROVIDER_GATOGR
 import {
   QUERY_SITE_DATA as WPGRAPHQL_QUERY_SITE_DATA,
   QUERY_SEO_DATA as WPGRAPHQL_QUERY_SEO_DATA,
-} from './wpgraphql/site';
+} from './providers/wpgraphql/site';
 
 import {
   QUERY_SITE_DATA as GATOGRAPHQL_QUERY_SITE_DATA,
   QUERY_SEO_DATA as GATOGRAPHQL_QUERY_SEO_DATA,
-} from './gatographql/site';
+} from './providers/gatographql/site';
 
 module.exports = function feed(nextConfig = {}) {
   const { env } = nextConfig;
