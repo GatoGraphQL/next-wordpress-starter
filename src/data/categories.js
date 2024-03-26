@@ -10,8 +10,7 @@ import {
   QUERY_CATEGORY_SEO_BY_SLUG as GATOGRAPHQL_QUERY_CATEGORY_SEO_BY_SLUG,
 } from './providers/gatographql/categories';
 
-const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
-
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
 module.exports = {
   ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
     ? {

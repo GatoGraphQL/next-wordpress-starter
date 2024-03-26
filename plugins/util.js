@@ -6,7 +6,7 @@ const prettier = require('prettier');
 
 const config = require('../package.json');
 
-const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('../src/lib/provider');
 
 const {
   QUERY_ALL_POSTS,

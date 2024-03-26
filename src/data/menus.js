@@ -2,8 +2,7 @@ import { QUERY_ALL_MENUS as WPGRAPHQL_QUERY_ALL_MENUS } from './providers/wpgrap
 
 import { QUERY_ALL_MENUS as GATOGRAPHQL_QUERY_ALL_MENUS } from './providers/gatographql/menus';
 
-const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
-
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
 module.exports = {
   ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
     ? {

@@ -30,7 +30,7 @@ import {
   QUERY_POST_PER_PAGE as GATOGRAPHQL_QUERY_POST_PER_PAGE,
 } from './providers/gatographql/posts';
 
-const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
 
 module.exports = {
   ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'

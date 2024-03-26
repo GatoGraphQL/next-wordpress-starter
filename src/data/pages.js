@@ -16,8 +16,7 @@ import {
   QUERY_PAGE_SEO_BY_URI as GATOGRAPHQL_QUERY_PAGE_SEO_BY_URI,
 } from './providers/gatographql/pages';
 
-const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
-
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
 module.exports = {
   ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
     ? {

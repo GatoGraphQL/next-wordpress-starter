@@ -8,8 +8,7 @@ import {
   QUERY_SEO_DATA as GATOGRAPHQL_QUERY_SEO_DATA,
 } from './providers/gatographql/site';
 
-const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
-
+const { WORDPRESS_GRAPHQL_PROVIDER } = require('lib/provider');
 module.exports = {
   ...(WORDPRESS_GRAPHQL_PROVIDER === 'wpgraphql'
     ? {
