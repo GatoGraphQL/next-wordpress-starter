@@ -3,13 +3,16 @@
  */
 
 function getWordPressGraphQLProvider() {
-  const providers = ['wpgraphql', 'gatographql'];
+  const provider = (process.env.WORDPRESS_GRAPHQL_PROVIDER || '').toLowerCase();
   const defaultProvider = 'wpgraphql';
-  const selectedProvider = (process.env.WORDPRESS_GRAPHQL_PROVIDER || '').toLowerCase();
+  if (!provider) return defaultProvider;
 
-  if (!selectedProvider || !providers.includes(selectedProvider)) return defaultProvider;
+  const providers = ['wpgraphql', 'gatographql'];
+  if (!providers.includes(provider)) {
+    throw new Error(`There is no provider '${provider}'. Options are: '${providers.join("', '")}'`);
+  }
 
-  return selectedProvider;
+  return provider;
 }
 
 const WORDPRESS_GRAPHQL_PROVIDER = getWordPressGraphQLProvider();
