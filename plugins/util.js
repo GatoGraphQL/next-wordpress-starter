@@ -6,7 +6,13 @@ const prettier = require('prettier');
 
 const config = require('../package.json');
 
-import { QUERY_ALL_POSTS, QUERY_SITE_METADATA, QUERY_ALL_PAGES } from 'data/util';
+const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
+
+const {
+  QUERY_ALL_POSTS,
+  QUERY_SITE_METADATA,
+  QUERY_ALL_PAGES,
+} = require(`./providers/${WORDPRESS_GRAPHQL_PROVIDER}/util`);
 
 /**
  * createFile

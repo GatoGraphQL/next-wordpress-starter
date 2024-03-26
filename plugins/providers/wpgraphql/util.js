@@ -1,6 +1,6 @@
 const { gql } = require('@apollo/client');
 
-export const QUERY_ALL_POSTS = gql`
+const QUERY_ALL_POSTS = gql`
   {
     posts(first: 10000) {
       edges {
@@ -29,7 +29,7 @@ export const QUERY_ALL_POSTS = gql`
   }
 `;
 
-export const QUERY_SITE_METADATA = gql`
+const QUERY_SITE_METADATA = gql`
   {
     generalSettings {
       description
@@ -39,7 +39,7 @@ export const QUERY_SITE_METADATA = gql`
   }
 `;
 
-export const QUERY_ALL_PAGES = gql`
+const QUERY_ALL_PAGES = gql`
   {
     pages(first: 10000) {
       edges {
@@ -51,3 +51,9 @@ export const QUERY_ALL_PAGES = gql`
     }
   }
 `;
+
+module.exports = {
+  QUERY_ALL_POSTS,
+  QUERY_SITE_METADATA,
+  QUERY_ALL_PAGES,
+};
