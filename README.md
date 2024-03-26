@@ -19,7 +19,7 @@ Scaling WordPress with the power of [Next.js](https://nextjs.org/) and the stati
 
 ### Requirements
 * [WordPress](https://wordpress.org/)
-* [WPGraphQL](https://www.wpgraphql.com/)
+* [WPGraphQL](https://www.wpgraphql.com/) or [Gato GraphQL](https://gatographql.com)
 * Environment variables (see below)
 
 ```bash
@@ -68,7 +68,7 @@ Check out the [Issues](https://github.com/colbyfayock/next-wordpress-starter/iss
 
 ### Requirements
 * [WordPress](https://wordpress.org/)
-* [WPGraphQL](https://www.wpgraphql.com/)
+* [WPGraphQL](https://www.wpgraphql.com/) or [Gato GraphQL](https://gatographql.com)
 * Environment variables (see below)
 
 ### Environment
