@@ -3,8 +3,7 @@ const feed = require('./plugins/feed');
 const sitemap = require('./plugins/sitemap');
 // const socialImages = require('./plugins/socialImages'); TODO: failing to run on Netlify
 
-const WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL = 'wpgraphql';
-const WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL = 'gatographql';
+import { WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL, WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL } from 'providers/providers';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
