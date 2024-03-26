@@ -4,21 +4,17 @@ import { QUERY_ALL_MENUS as WPGRAPHQL_QUERY_ALL_MENUS } from './providers/wpgrap
 
 import { QUERY_ALL_MENUS as GATOGRAPHQL_QUERY_ALL_MENUS } from './providers/gatographql/menus';
 
-module.exports = function feed(nextConfig = {}) {
-  const { env } = nextConfig;
+const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
 
-  const { WORDPRESS_GRAPHQL_PROVIDER } = env;
-
-  return Object.assign({}, nextConfig, {
-    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
-      ? {
-          WPGRAPHQL_QUERY_ALL_MENUS,
-        }
-      : {}),
-    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
-      ? {
-          GATOGRAPHQL_QUERY_ALL_MENUS,
-        }
-      : {}),
-  });
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
+    ? {
+        QUERY_ALL_MENUS: WPGRAPHQL_QUERY_ALL_MENUS,
+      }
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
+    ? {
+        QUERY_ALL_MENUS: GATOGRAPHQL_QUERY_ALL_MENUS,
+      }
+    : {}),
 };

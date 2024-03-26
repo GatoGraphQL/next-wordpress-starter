@@ -10,23 +10,19 @@ import {
   QUERY_ALL_USERS_SEO as GATOGRAPHQL_QUERY_ALL_USERS_SEO,
 } from './providers/gatographql/users';
 
-module.exports = function feed(nextConfig = {}) {
-  const { env } = nextConfig;
+const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
 
-  const { WORDPRESS_GRAPHQL_PROVIDER } = env;
-
-  return Object.assign({}, nextConfig, {
-    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
-      ? {
-          WPGRAPHQL_QUERY_ALL_USERS,
-          WPGRAPHQL_QUERY_ALL_USERS_SEO,
-        }
-      : {}),
-    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
-      ? {
-          GATOGRAPHQL_QUERY_ALL_USERS,
-          GATOGRAPHQL_QUERY_ALL_USERS_SEO,
-        }
-      : {}),
-  });
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
+    ? {
+        QUERY_ALL_USERS: WPGRAPHQL_QUERY_ALL_USERS,
+        QUERY_ALL_USERS_SEO: WPGRAPHQL_QUERY_ALL_USERS_SEO,
+      }
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
+    ? {
+        QUERY_ALL_USERS: GATOGRAPHQL_QUERY_ALL_USERS,
+        QUERY_ALL_USERS_SEO: GATOGRAPHQL_QUERY_ALL_USERS_SEO,
+      }
+    : {}),
 };

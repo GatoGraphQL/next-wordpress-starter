@@ -10,23 +10,19 @@ import {
   QUERY_SEO_DATA as GATOGRAPHQL_QUERY_SEO_DATA,
 } from './providers/gatographql/site';
 
-module.exports = function feed(nextConfig = {}) {
-  const { env } = nextConfig;
+const { WORDPRESS_GRAPHQL_PROVIDER } = process.env;
 
-  const { WORDPRESS_GRAPHQL_PROVIDER } = env;
-
-  return Object.assign({}, nextConfig, {
-    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
-      ? {
-          WPGRAPHQL_QUERY_SITE_DATA,
-          WPGRAPHQL_QUERY_SEO_DATA,
-        }
-      : {}),
-    ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
-      ? {
-          GATOGRAPHQL_QUERY_SITE_DATA,
-          GATOGRAPHQL_QUERY_SEO_DATA,
-        }
-      : {}),
-  });
+module.exports = {
+  ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_WPGRAPHQL
+    ? {
+        QUERY_SITE_DATA: WPGRAPHQL_QUERY_SITE_DATA,
+        QUERY_SEO_DATA: WPGRAPHQL_QUERY_SEO_DATA,
+      }
+    : {}),
+  ...(WORDPRESS_GRAPHQL_PROVIDER === WORDPRESS_GRAPHQL_PROVIDER_GATOGRAPHQL
+    ? {
+        QUERY_SITE_DATA: GATOGRAPHQL_QUERY_SITE_DATA,
+        QUERY_SEO_DATA: GATOGRAPHQL_QUERY_SEO_DATA,
+      }
+    : {}),
 };
