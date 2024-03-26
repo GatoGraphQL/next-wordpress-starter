@@ -1,6 +1,6 @@
 import { getApolloClient } from 'lib/apollo-client';
 import { getTopLevelPages } from 'lib/pages';
-import { QUERY_ALL_MENUS } from 'providers/gatographql/data/menus';
+import { QUERY_ALL_MENUS } from 'data/menus';
 
 export const MENU_LOCATION_NAVIGATION_DEFAULT = 'DEFAULT_NAVIGATION';
 

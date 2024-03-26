@@ -6,7 +6,7 @@ const prettier = require('prettier');
 
 const config = require('../package.json');
 
-import { QUERY_ALL_POSTS, QUERY_SITE_METADATA, QUERY_ALL_PAGES } from 'providers/gatographql/data/util';
+import { QUERY_ALL_POSTS, QUERY_SITE_METADATA, QUERY_ALL_PAGES } from 'data/util';
 
 /**
  * createFile
