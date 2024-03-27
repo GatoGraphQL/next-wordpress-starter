@@ -14,7 +14,6 @@ Scaling WordPress with the power of [Next.js](https://nextjs.org/) and the stati
 - [🚀 Getting Started](#-getting-started)
 - [🛠 Configuring Your Project](#-configuring-your-project)
 - [🔌 Plugins](#-plugins)
-- [💝 Sponsors](#-sponsors)
 - [✨ Contributors](#-contributors)
 
 ## ⚡️ Quick Start
@@ -180,12 +179,6 @@ Examples of websites that started off with Next.js WordPress Starter
 
 * [colbyfayock.com](https://colbyfayock.com/)
 * [spacejelly.dev](https://spacejelly.dev/)
-
-## 💝 Sponsors
-
-WordPress hosting for the public-facing project provided by [WP Engine](https://wpengine.com/).
-
-<img width="315" height="60" src="https://user-images.githubusercontent.com/1045274/119288571-cb3ce480-bc16-11eb-9061-9cc264ca16de.jpg" alt="WP Engine Logo" />
 
 ## ✨ Contributors
 
