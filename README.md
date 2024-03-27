@@ -4,6 +4,10 @@ _This is a fork of [`leoloso/next-wordpress-starter`](https://github.com/leoloso
 
 ---
 
+_This is a fork of [`colbyfayock/next-wordpress-starter`](https://github.com/colbyfayock/next-wordpress-starter) that adds support to multiple GraphQL servers for WordPress: [WPGraphQL](https://www.wpgraphql.com) (as in the upstream) and [Gato GraphQL](https://gatographql.com) (added to this fork)._
+
+---
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
