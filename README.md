@@ -1,4 +1,8 @@
-# Next.js WordPress Starter
+# Next.js WordPress Starter with Gato GraphQL
+
+_This is a fork of [`leoloso/next-wordpress-starter`](https://github.com/leoloso/next-wordpress-starter) that directly uses [Gato GraphQL](https://gatographql.com) as the GraphQL server for WordPress._
+
+---
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors-)
@@ -19,7 +23,7 @@ Scaling WordPress with the power of [Next.js](https://nextjs.org/) and the stati
 
 ### Requirements
 * [WordPress](https://wordpress.org/)
-* [WPGraphQL](https://www.wpgraphql.com/) or [Gato GraphQL](https://gatographql.com)
+* [Gato GraphQL](https://gatographql.com)
 * Environment variables (see below)
 
 ```bash
@@ -31,17 +35,6 @@ npx create-next-app -e https://github.com/colbyfayock/next-wordpress-starter
 Add an `.env.local` file to the root with the following:
 ```
 WORDPRESS_GRAPHQL_ENDPOINT="http://wordpressite.com/graphql"
-```
-
-In some cases, the above may not work.
-Change it as follows:
-```
-WORDPRESS_GRAPHQL_ENDPOINT="http://yourhost.com/index.php?graphql
-```
-
-The starter by default uses **WPGraphQL**. To use **Gato GraphQL**, add this variable to `.env.local`:
-```
-WORDPRESS_GRAPHQL_PROVIDER="gatographql"
 ```
 
 ## 🚀 Getting Started
@@ -65,20 +58,10 @@ Additionally, the theme is expected to be SEO friendly and performant out of the
 * Unique descriptions
 * Open Graph tags
 
-You can also optionally enable Yoast SEO plugin support to supercharge your SEO! (See below)
-
-Check out the [Issues](https://github.com/colbyfayock/next-wordpress-starter/issues) for what's on deck!
-
-*Want something a little more **basic**? Check out my other starter with an MVP setup to get up and running with WPGraphQL in WordPress: https://github.com/colbyfayock/next-wpgraphql-basic-starter*
-
 ### Requirements
 * [WordPress](https://wordpress.org/)
-* [WPGraphQL](https://www.wpgraphql.com/) or [Gato GraphQL](https://gatographql.com)
+* [Gato GraphQL](https://gatographql.com)
 * Environment variables (see below)
-
-### Providers
-
-This project makes use of **WPGraphQL** or **Gato GraphQL** to query WordPress with GraphQL. Which provider to use is your choice. By default, **WPGraphQL** is used.
 
 ### Environment
 
@@ -101,9 +84,7 @@ Replace the contents of the variable with your GraphQL endpoint. By default, it 
 | Name                               | Required | Default   | Description                                       |
 | ---------------------------------- | -------- | -         | ------------------------------------------------- |
 | WORDPRESS_GRAPHQL_ENDPOINT         | Yes      | -         | WordPress GraphQL endpoint (ex: host.com/graphql) |
-| WORDPRESS_GRAPHQL_PROVIDER         | No       | wpgraphql | GraphQL provider: 'wpgraphql' or 'gatographql'    |
 | WORDPRESS_MENU_LOCATION_NAVIGATION | No       | PRIMARY   | Configures header navigation Menu Location        |
-| WORDPRESS_PLUGIN_SEO               | No       | false     | Enables SEO plugin support (true, false)          |
 
 Please note some themes do not have PRIMARY menu location.
 
@@ -192,18 +173,6 @@ To serve the images statically, you have a few options.
 By enabling the Image Accelerator from Jetpack, your images will automatically be served statically and cached via the wp.com CDN. This feature comes free with the basic installation of Jetpack, requiring only that you connect the WordPress site to the Jetpack service.
 
 [Jetpack CDN](https://jetpack.com/features/design/content-delivery-network/)
-
-## 🔌 Plugins
-
-### Yoast SEO
-
-The Yoast SEO plugin is partially supported including most major features like metadata and open graph customization. For WPGraphQL only.
-
-#### Requirements
-* Yoast SEO plugin
-* Add WPGraphQL SEO plugin
-
-To enable the plugin, configure `WORDPRESS_PLUGIN_SEO` to be `true` either as an environment variable or within next.config.js.
 
 ## 🥾 Bootstrapped with Next.js WordPress Starter
 

@@ -4,10 +4,10 @@
 
 function getWordPressGraphQLProvider() {
   const provider = (process.env.WORDPRESS_GRAPHQL_PROVIDER || '').toLowerCase();
-  const defaultProvider = 'wpgraphql';
+  const defaultProvider = 'gatographql';
   if (!provider) return defaultProvider;
 
-  const providers = ['wpgraphql', 'gatographql'];
+  const providers = ['gatographql'];
   if (!providers.includes(provider)) {
     throw new Error(`There is no provider '${provider}'. Options are: '${providers.join("', '")}'`);
   }
