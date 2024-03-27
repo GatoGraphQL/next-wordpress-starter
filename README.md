@@ -1,5 +1,9 @@
 # Next.js WordPress Starter with Gato GraphQL
 
+_This is a fork of [`leoloso/next-wordpress-starter`](https://github.com/leoloso/next-wordpress-starter) that directly uses [Gato GraphQL](https://gatographql.com) as the GraphQL server for WordPress_
+
+---
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-19-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
